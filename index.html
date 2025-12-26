@@ -897,96 +897,8 @@
             let resultTitle = '';
             let resultDescription = '';
 
-            // NEW LOGIC: Decision tree checks categories in priority order
-            
-            // Category 1: SECURE (must be highest score and ≥15)
-            if (scores.secure >= 15 && scores.secure > scores.anxious && scores.secure > scores.avoidant) {
-                resultTitle = "You're Secure (But Your Partner Might Not Be)";
-                resultDescription = `
-                    <h3>What This Means:</h3>
-                    <p>You have secure attachment tendencies. You:</p>
-                    <ul>
-                        <li>Communicate your needs clearly</li>
-                        <li>Give space without panic</li>
-                        <li>Stay during conflict</li>
-                        <li>Have healthy boundaries</li>
-                    </ul>
-                    
-                    <h3>So Why Are You Here?</h3>
-                    <p>Because you're with someone who ISN'T secure, or you're healing from past insecure patterns.</p>
-                    
-                    <h3>The Truth:</h3>
-                    <p>Secure people can handle avoidant partners better than anxious people can. But "better" doesn't mean "good."</p>
-                    
-                    <h3>Your Question:</h3>
-                    <p>"Can I love them into security?"</p>
-                    <p><strong>Answer: No.</strong></p>
-                    <p>Ask yourself: Am I happy with THIS version of them? Or am I waiting for who they could become?</p>
-                `;
-            }
-            // Category 2: FEARFUL-AVOIDANT (high in BOTH)
-            else if (scores.anxious >= 22 && scores.avoidant >= 22) {
-                resultTitle = "You're Fearful-Avoidant (Disorganized)";
-                resultDescription = `
-                    <h3>What This Means:</h3>
-                    <p>You have BOTH anxious AND avoidant traits. The internal battle:</p>
-                    <ul>
-                        <li>You crave intimacy but fear it</li>
-                        <li>You want them close but run when they get there</li>
-                        <li>You're terrified of abandonment AND engulfment</li>
-                    </ul>
-                    
-                    <p><strong>This is the rarest and most painful attachment style.</strong></p>
-                    
-                    <h3>Why You Feel Confused:</h3>
-                    <p>Your nervous system is at war with itself. The anxious side says "Please don't leave me" while the avoidant side says "Please don't suffocate me."</p>
-                    
-                    <h3>What You Need:</h3>
-                    <p><strong>This requires professional help.</strong> Fearful-avoidant often stems from complex trauma. Consider trauma-informed therapy, somatic work, and possibly EMDR.</p>
-                    
-                    <h3>Episodes You NEED:</h3>
-                    <ul>
-                        <li>ALL 12 EPISODES</li>
-                        <li>Episode 4: Understanding Your Brain</li>
-                        <li>Episode 9: Can You Change?</li>
-                        <li>Episode 10: Breaking The Cycle</li>
-                    </ul>
-                `;
-            }
-            // Category 3: ANXIOUS-AVOIDANT TRAP (very high anxious + moderate avoidant)
-            else if (scores.anxious >= 28 && scores.avoidant >= 12 && scores.avoidant <= 21) {
-                resultTitle = "🚨 You're IN The Anxious-Avoidant Trap";
-                resultDescription = `
-                    <h3>What This Means:</h3>
-                    <p><strong>You're in the most toxic dynamic in attachment theory.</strong></p>
-                    <p>You: Anxious attachment<br>Them: Avoidant attachment<br>Together: Disaster</p>
-                    
-                    <h3>The Cycle:</h3>
-                    <ul>
-                        <li>They pull away → You chase</li>
-                        <li>You chase → They retreat</li>
-                        <li>They retreat → You panic</li>
-                        <li>You panic → They shut down</li>
-                    </ul>
-                    <p><strong>This can last YEARS.</strong></p>
-                    
-                    <h3>Why You're Developing Avoidant Traits:</h3>
-                    <p>The pain is making you protect yourself. You're starting to pull away too—not because you're avoidant, but because you're exhausted.</p>
-                    
-                    <h3>The Brutal Truth:</h3>
-                    <p>This won't get better without BOTH of you doing serious work.</p>
-                    
-                    <h3>You CANNOT Miss:</h3>
-                    <ul>
-                        <li>ALL 12 EPISODES</li>
-                        <li>Especially Episode 6: Avoidant vs. Not Interested</li>
-                        <li>Episode 9: Can They Change?</li>
-                        <li>Episode 11: When To Walk Away</li>
-                    </ul>
-                `;
-            }
-            // Category 4: CLASSIC ANXIOUS ATTACHMENT
-            else if (scores.anxious >= 20 && scores.avoidant < 12) {
+            // Determine result category - FIXED LOGIC
+            if (scores.anxious >= 25 && scores.avoidant < 15) {
                 resultTitle = "You Have Classic Anxious Attachment";
                 resultDescription = `
                     <h3>What This Means:</h3>
@@ -1013,10 +925,8 @@
                         <li>Episode 12: Stop Attracting Avoidants</li>
                     </ul>
                 `;
-            }
-            // Category 5: AVOIDANT ATTACHMENT
-            else if (scores.avoidant >= 20 && scores.anxious < 12) {
-                resultTitle = "You Have Avoidant Attachment";
+            } else if (scores.avoidant >= 25 && scores.anxious < 15) {
+                resultTitle = "You're Avoidant (Partner Is Anxious)";
                 resultDescription = `
                     <h3>What This Means:</h3>
                     <p>You're the person who:</p>
@@ -1042,13 +952,117 @@
                         <li>Episode 11: When To Walk Away</li>
                     </ul>
                 `;
-            }
-            // Category 6: BECOMING SECURE (default/healing)
-            else {
+            } else if (scores.anxious >= 20 && scores.avoidant >= 20) {
+                resultTitle = "🚨 You're IN The Anxious-Avoidant Trap";
+                resultDescription = `
+                    <h3>What This Means:</h3>
+                    <p><strong>You're in the most toxic dynamic in attachment theory.</strong></p>
+                    <p>You: Anxious attachment<br>Them: Avoidant attachment<br>Together: Disaster</p>
+                    
+                    <h3>The Cycle:</h3>
+                    <ul>
+                        <li>They pull away → You chase</li>
+                        <li>You chase → They retreat</li>
+                        <li>They retreat → You panic</li>
+                        <li>You panic → They shut down</li>
+                    </ul>
+                    <p><strong>This can last YEARS.</strong></p>
+                    
+                    <h3>The Brutal Truth:</h3>
+                    <p>This won't get better without BOTH of you doing serious work.</p>
+                    
+                    <h3>You CANNOT Miss:</h3>
+                    <ul>
+                        <li>ALL 12 EPISODES</li>
+                        <li>Especially Episode 6: Avoidant vs. Not Interested</li>
+                        <li>Episode 9: Can They Change?</li>
+                        <li>Episode 11: When To Walk Away</li>
+                    </ul>
+                `;
+            } else if (scores.anxious >= 12 && scores.avoidant >= 12) {
+                resultTitle = "You're Fearful-Avoidant (Disorganized)";
+                resultDescription = `
+                    <h3>What This Means:</h3>
+                    <p>You have BOTH anxious AND avoidant traits. The internal battle:</p>
+                    <ul>
+                        <li>You crave intimacy but fear it</li>
+                        <li>You want them close but run when they get there</li>
+                        <li>You're terrified of abandonment AND engulfment</li>
+                        <li>You chase then run, then chase again</li>
+                        <li>You feel trapped when close, abandoned when distant</li>
+                    </ul>
+                    
+                    <p><strong>This is the rarest and most painful attachment style.</strong></p>
+                    
+                    <h3>Why You Feel This Way:</h3>
+                    <p>Your nervous system is at war with itself:</p>
+                    <p><strong>Anxious side:</strong> "Please don't leave me, I need you"<br>
+                    <strong>Avoidant side:</strong> "Don't get too close, I need space"<br>
+                    <strong>The result:</strong> Constant internal conflict</p>
+                    
+                    <h3>What Happens In Relationships:</h3>
+                    <ul>
+                        <li>You get close → Feel suffocated → Create distance</li>
+                        <li>They pull back → You panic → You chase</li>
+                        <li>They come closer → You feel overwhelmed → Repeat</li>
+                    </ul>
+                    
+                    <p><strong>Your partners feel:</strong> Confused and exhausted<br>
+                    <strong>You feel:</strong> Crazy and broken</p>
+                    
+                    <h3>The Truth:</h3>
+                    <p><strong>You're not broken. You're disorganized.</strong></p>
+                    <p>Your nervous system received contradictory instructions about love. It learned that people are both your source of safety AND danger. So it does both - seeks connection and pushes it away - at the same time.</p>
+                    
+                    <h3>What You Need:</h3>
+                    <p><strong>This requires professional help.</strong> Fearful-avoidant is complex trauma. You need:</p>
+                    <ul>
+                        <li>Trauma-informed therapy (EMDR, IFS, somatic work)</li>
+                        <li>Nervous system regulation practices</li>
+                        <li>Attachment-focused treatment</li>
+                        <li>Time and patience - this is deep healing work</li>
+                    </ul>
+                    
+                    <h3>Episodes You CANNOT Miss:</h3>
+                    <ul>
+                        <li>Episode 3: You're Not "Too Needy"</li>
+                        <li>Episode 4: What Happens In Your Brain</li>
+                        <li>Episode 8: What You Can Control</li>
+                        <li>Episode 9: Can You Change?</li>
+                        <li>Episode 12: How To Stop This Pattern</li>
+                    </ul>
+                    
+                    <p><strong>You CAN heal from this. But it takes real work with a professional who understands attachment trauma.</strong></p>
+                `;
+            } else if (scores.secure >= 15 && scores.anxious < 15 && scores.avoidant < 15) {
+                resultTitle = "You're Secure (Partner Is The Problem)";
+                resultDescription = `
+                    <h3>What This Means:</h3>
+                    <p>You have secure attachment. You:</p>
+                    <ul>
+                        <li>Communicate your needs clearly</li>
+                        <li>Give space without panic</li>
+                        <li>Stay during conflict</li>
+                        <li>Have healthy boundaries</li>
+                    </ul>
+                    
+                    <h3>So Why Are You Here?</h3>
+                    <p>Because you're with someone who ISN'T secure.</p>
+                    
+                    <h3>The Truth:</h3>
+                    <p>Secure people can handle avoidant partners better than anxious people can. But "better" doesn't mean "good."</p>
+                    
+                    <h3>Your Question:</h3>
+                    <p>"Can I love them into security?"</p>
+                    <p><strong>Answer: No.</strong></p>
+                    <p>Ask yourself: Am I happy with THIS version of them? Or am I waiting for who they could become?</p>
+                `;
+            } else {
+                // Low scores across the board = Becoming Secure
                 resultTitle = "You're Becoming Secure (Healing In Progress)";
                 resultDescription = `
                     <h3>What This Means:</h3>
-                    <p>You're in transition. You had anxious or avoidant patterns, but you're doing the work.</p>
+                    <p>You're in transition. You were anxious/avoidant, but you're doing the work.</p>
                     
                     <h3>Signs You're Healing:</h3>
                     <ul>
@@ -1063,13 +1077,6 @@
                     
                     <h3>Keep Going:</h3>
                     <p>Continue therapy, self-awareness practices, boundary setting, and choosing emotionally available people. Your nervous system is rewiring. Don't undo the work.</p>
-                    
-                    <h3>Episodes That Will Help:</h3>
-                    <ul>
-                        <li>Episode 8: What You Can Control</li>
-                        <li>Episode 10: Breaking The Cycle</li>
-                        <li>Episode 12: Moving Forward</li>
-                    </ul>
                 `;
             }
 
