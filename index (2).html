@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are You In The Anxious-Avoidant Trap? | Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            position: relative;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .question-counter {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 28px;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .benefits {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .benefits p {
+            color: #4a5568;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .benefits p::before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .question-text {
+            color: #2d3748;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            min-height: 56px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #edf2f7;
+            transform: translateX(5px);
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .option label {
+            cursor: pointer;
+            flex: 1;
+            color: #2d3748;
+            font-size: 16px;
+            line-height: 1.5;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .option.selected {
+            background: #edf2f7;
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 48px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .email-gate {
+            text-align: center;
+        }
+
+        .email-gate h2 {
+            color: #2d3748;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .email-gate p {
+            color: #718096;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: border-color 0.2s;
+        }
+
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .result-container {
+            text-align: center;
+        }
+
+        .result-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            font-size: 32px;
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .scores {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .score-box {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 12px;
+            flex: 1;
+            max-width: 150px;
+        }
+
+        .score-label {
+            font-size: 12px;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .score-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-top: 5px;
+        }
+
+        .result-description {
+            text-align: left;
+            margin: 30px 0;
+            line-height: 1.8;
+            color: #4a5568;
+        }
+
+        .result-description h3 {
+            color: #2d3748;
+            margin: 25px 0 15px;
+        }
+
+        .result-description ul {
+            margin-left: 20px;
+        }
+
+        .result-description li {
+            margin: 8px 0;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .cta-box h3 {
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .quiz-container {
+                padding: 20px;
+                border-radius: 15px;
+            }
+
+            h1 {
+                font-size: 22px;
+                margin-bottom: 12px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
+            .question-text {
+                font-size: 17px;
+                margin-bottom: 20px;
+            }
+
+            .option {
+                padding: 14px 16px;
+                font-size: 15px;
+            }
+
+            .option label {
+                font-size: 15px;
+                line-height: 1.4;
+            }
+
+            button {
+                padding: 14px 24px;
+                font-size: 15px;
+            }
+
+            .buttons {
+                gap: 10px;
+                margin-top: 25px;
+            }
+
+            .scores {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .score-box {
+                max-width: 100%;
+                padding: 16px;
+            }
+
+            .result-title {
+                font-size: 24px;
+                line-height: 1.3;
+            }
+
+            .result-description {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+
+            .result-description h3 {
+                font-size: 18px;
+                margin: 20px 0 12px;
+            }
+
+            .cta-box {
+                padding: 20px;
+            }
+
+            .cta-box h3 {
+                font-size: 18px;
+            }
+
+            .cta-box p {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            .benefits {
+                padding: 16px;
+                margin-bottom: 20px;
+            }
+
+            .benefits p {
+                font-size: 14px;
+            }
+
+            .email-gate h2 {
+                font-size: 20px;
+            }
+
+            .email-gate p {
+                font-size: 14px;
+            }
+
+            input[type="email"] {
+                padding: 14px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen">
+            <h1>Are You In The Anxious-Avoidant Trap?</h1>
+            <p class="subtitle">Take this 3-minute quiz to find out exactly what's happening in your relationship.</p>
+            
+            <div class="benefits">
+                <p>Your attachment style</p>
+                <p>Why you feel crazy</p>
+                <p>What to do next</p>
+            </div>
+
+            <p style="color: #718096; margin-bottom: 30px;"><strong>15 questions. Brutally honest results.</strong></p>
+
+            <button class="btn-primary" onclick="startQuiz()">START QUIZ</button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            <div class="question-counter" id="counter"></div>
+            
+            <div class="question-text" id="question"></div>
+            <div class="options" id="options"></div>
+
+            <div class="buttons">
+                <button class="btn-secondary hidden" id="prevBtn" onclick="previousQuestion()">← BACK</button>
+                <button class="btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>NEXT →</button>
+            </div>
+        </div>
+
+        <!-- Email Gate -->
+        <div id="email-screen" class="hidden">
+            <div class="email-gate">
+                <h2>📊 Calculating Your Results...</h2>
+                <p>Enter your email to see your personalized results</p>
+                
+                <div class="benefits" style="text-align: left;">
+                    <p>Your attachment style breakdown</p>
+                    <p>Why you feel the way you do</p>
+                    <p>Personalized action plan</p>
+                    <p>Access to the full 12-episode series</p>
+                </div>
+
+                <input type="email" id="emailInput" placeholder="your@email.com" required>
+                <button class="btn-primary" onclick="submitEmail()">SEE MY RESULTS →</button>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="hidden">
+            <div class="loading">
+                <div class="spinner"></div>
+                <h2>Analyzing your responses...</h2>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="hidden">
+            <div class="result-container">
+                <div class="result-badge">YOUR RESULTS</div>
+                <h2 class="result-title" id="resultTitle"></h2>
+                
+                <div class="scores">
+                    <div class="score-box">
+                        <div class="score-label">Anxious</div>
+                        <div class="score-value" id="anxiousScore">0</div>
+                    </div>
+                    <div class="score-box">
+                        <div class="score-label">Avoidant</div>
+                        <div class="score-value" id="avoidantScore">0</div>
+                    </div>
+                    <div class="score-box">
+                        <div class="score-label">Secure</div>
+                        <div class="score-value" id="secureScore">0</div>
+                    </div>
+                </div>
+
+                <div class="result-description" id="resultDescription"></div>
+
+                <div class="cta-box">
+                    <h3>What Happens Next:</h3>
+                    <p>✅ Episode 1 drops tomorrow at 6pm</p>
+                    <p>✅ Follow @bloombymimi on Instagram</p>
+                    <p>✅ Save the series - Don't miss any episodes</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                id: 1,
+                text: "When your partner needs space, you typically:",
+                type: "radio",
+                options: [
+                    { text: "Feel immediate panic and try to fix whatever's wrong", anxious: 3 },
+                    { text: "Give them space but feel anxious the entire time", anxious: 2 },
+                    { text: "Feel relieved and use the time for yourself", secure: 2 },
+                    { text: "Feel confused about whether they still want you", anxious: 2, avoidant: 1 },
+                    { text: "Don't really notice or care much", avoidant: 3 }
+                ]
+            },
+            {
+                id: 2,
+                text: "How often do you check your phone waiting for their text?",
+                type: "radio",
+                options: [
+                    { text: "Never or rarely", avoidant: 2 },
+                    { text: "Occasionally", secure: 1 },
+                    { text: "Sometimes", secure: 1 },
+                    { text: "Often", anxious: 2 },
+                    { text: "Very frequently", anxious: 2 },
+                    { text: "Almost constantly", anxious: 3 },
+                    { text: "Constantly - it's the first thing I do", anxious: 3 }
+                ]
+            },
+            {
+                id: 3,
+                text: "After a really great date or deep conversation, you usually:",
+                type: "radio",
+                options: [
+                    { text: "Feel excited and want more closeness immediately", anxious: 2 },
+                    { text: "Feel warm but slightly nervous about what comes next", anxious: 1, secure: 1 },
+                    { text: "Feel good and look forward to seeing them again", secure: 2 },
+                    { text: "Feel overwhelmed and need to pull back", avoidant: 3 },
+                    { text: "Start analyzing if you said something wrong", anxious: 3 }
+                ]
+            },
+            {
+                id: 4,
+                text: "When they don't text back for several hours, your first thought is:",
+                type: "radio",
+                options: [
+                    { text: "They're probably busy, they'll respond when they can", secure: 2 },
+                    { text: "What did I do wrong?", anxious: 3 },
+                    { text: "Thank god, I needed a break anyway", avoidant: 2 },
+                    { text: "They're losing interest, I can feel it", anxious: 3 },
+                    { text: "Are they testing me?", anxious: 2 }
+                ]
+            },
+            {
+                id: 5,
+                text: "In past relationships, you typically:",
+                type: "radio",
+                options: [
+                    { text: "Leave when things get too serious", avoidant: 3 },
+                    { text: "Stay way too long hoping they'll change", anxious: 3 },
+                    { text: "End things when it's clearly not working", secure: 2 },
+                    { text: "Get left by people who say you're 'too intense'", anxious: 2 },
+                    { text: "Sabotage things when they get too close", avoidant: 3 }
+                ]
+            },
+            {
+                id: 6,
+                text: "When they pull away emotionally, you: (Select all that apply)",
+                type: "checkbox",
+                options: [
+                    { text: "Panic and try to fix it immediately", anxious: 2 },
+                    { text: "Blame yourself for doing something wrong", anxious: 2 },
+                    { text: "Feel relieved they're giving you space", avoidant: 2 },
+                    { text: "Overanalyze every interaction to find the problem", anxious: 2 },
+                    { text: "Pull away even harder yourself", avoidant: 2 },
+                    { text: "Feel confused but give them time", secure: 1 },
+                    { text: "Don't really notice or care", avoidant: 3 }
+                ]
+            },
+            {
+                id: 7,
+                text: "How comfortable are you expressing your needs in relationships?",
+                type: "radio",
+                options: [
+                    { text: "I never express needs", avoidant: 3 },
+                    { text: "Very uncomfortable", avoidant: 3 },
+                    { text: "Somewhat uncomfortable", anxious: 1, avoidant: 1 },
+                    { text: "Neutral", anxious: 1, avoidant: 1 },
+                    { text: "Somewhat comfortable", secure: 2 },
+                    { text: "Comfortable", secure: 2 },
+                    { text: "Very comfortable", secure: 2 }
+                ]
+            },
+            {
+                id: 8,
+                text: "When you're upset with them, you typically:",
+                type: "radio",
+                options: [
+                    { text: "Tell them immediately what's bothering you", secure: 2 },
+                    { text: "Bottle it up and hope it goes away", avoidant: 2 },
+                    { text: "Drop hints hoping they'll notice", anxious: 2 },
+                    { text: "Shut down and create distance", avoidant: 3 },
+                    { text: "Overthink it but eventually communicate", anxious: 1, secure: 1 }
+                ]
+            },
+            {
+                id: 9,
+                text: "The idea of fully merging your life with someone makes you feel:",
+                type: "radio",
+                options: [
+                    { text: "Excited and hopeful", secure: 2 },
+                    { text: "Terrified of losing yourself", avoidant: 2 },
+                    { text: "Happy but want to take it slow", secure: 2 },
+                    { text: "Desperate to make it happen fast", anxious: 3 },
+                    { text: "Suffocated just thinking about it", avoidant: 3 }
+                ]
+            },
+            {
+                id: 10,
+                text: "When they're inconsistent with communication, you:",
+                type: "radio",
+                options: [
+                    { text: "Accept it as their communication style", secure: 1, avoidant: 1 },
+                    { text: "Feel anxious and check your phone constantly", anxious: 3 },
+                    { text: "Match their energy and pull back too", avoidant: 2 },
+                    { text: "Bring it up calmly and ask about it", secure: 2 },
+                    { text: "Assume they're not interested anymore", anxious: 2 }
+                ]
+            },
+            {
+                id: 11,
+                text: "How often do you sacrifice your own needs to keep the peace?",
+                type: "radio",
+                options: [
+                    { text: "Never", avoidant: 2 },
+                    { text: "Rarely", avoidant: 2 },
+                    { text: "Sometimes", secure: 1 },
+                    { text: "Often", anxious: 3 },
+                    { text: "Very often", anxious: 3 },
+                    { text: "Almost always", anxious: 3 },
+                    { text: "Always", anxious: 3 }
+                ]
+            },
+            {
+                id: 12,
+                text: "When they're going through something difficult, you:",
+                type: "radio",
+                options: [
+                    { text: "Want to be there for them but give them space to ask", secure: 2 },
+                    { text: "Feel helpless and overwhelmed by their emotions", anxious: 2 },
+                    { text: "Jump in immediately to fix everything", anxious: 3 },
+                    { text: "Feel uncomfortable and create distance", avoidant: 3 },
+                    { text: "Support them but maintain your own boundaries", secure: 2 }
+                ]
+            },
+            {
+                id: 13,
+                text: "How often do you replay conversations analyzing what went wrong?",
+                type: "radio",
+                options: [
+                    { text: "Never", avoidant: 2 },
+                    { text: "Rarely", avoidant: 2 },
+                    { text: "Sometimes", secure: 1 },
+                    { text: "Often", anxious: 3 },
+                    { text: "Very often", anxious: 3 },
+                    { text: "Almost constantly", anxious: 3 },
+                    { text: "Constantly - I can't stop", anxious: 3 }
+                ]
+            },
+            {
+                id: 14,
+                text: "In the relationship, you typically:",
+                type: "radio",
+                options: [
+                    { text: "Chase them for attention and reassurance", anxious: 3 },
+                    { text: "Run when things get too intimate", avoidant: 3 },
+                    { text: "Have a balanced give and take", secure: 2 },
+                    { text: "Over-give hoping they'll love you more", anxious: 3 },
+                    { text: "Withdraw when they need you most", avoidant: 3 }
+                ]
+            },
+            {
+                id: 15,
+                text: "The relationship pattern you notice most in your life:",
+                type: "radio",
+                options: [
+                    { text: "I attract emotionally unavailable people", anxious: 3 },
+                    { text: "People say I'm too distant or cold", avoidant: 2 },
+                    { text: "I have mostly healthy, balanced relationships", secure: 2 },
+                    { text: "I'm always the one who cares more", anxious: 3 },
+                    { text: "I leave right when things get good", avoidant: 3 }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+        let scores = { anxious: 0, avoidant: 0, secure: 0 };
+
+        function startQuiz() {
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('counter').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('question').textContent = q.text;
+            
+            const progress = ((currentQuestion) / questions.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+
+            q.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.onclick = () => selectOption(index, q.type);
+
+                const input = document.createElement('input');
+                input.type = q.type;
+                input.name = 'question' + q.id;
+                input.id = 'option' + index;
+                input.value = index;
+
+                const label = document.createElement('label');
+                label.htmlFor = 'option' + index;
+                label.textContent = option.text;
+
+                optionDiv.appendChild(input);
+                optionDiv.appendChild(label);
+                optionsDiv.appendChild(optionDiv);
+            });
+
+            // Show/hide previous button
+            if (currentQuestion > 0) {
+                document.getElementById('prevBtn').classList.remove('hidden');
+            } else {
+                document.getElementById('prevBtn').classList.add('hidden');
+            }
+
+            // Update next button text
+            if (currentQuestion === questions.length - 1) {
+                document.getElementById('nextBtn').textContent = 'SEE RESULTS →';
+            }
+
+            // Restore previous answers
+            if (answers[currentQuestion]) {
+                const savedAnswers = answers[currentQuestion];
+                if (Array.isArray(savedAnswers)) {
+                    savedAnswers.forEach(idx => {
+                        document.getElementById('option' + idx).checked = true;
+                        document.querySelectorAll('.option')[idx].classList.add('selected');
+                    });
+                } else {
+                    document.getElementById('option' + savedAnswers).checked = true;
+                    document.querySelectorAll('.option')[savedAnswers].classList.add('selected');
+                }
+                document.getElementById('nextBtn').disabled = false;
+            } else {
+                document.getElementById('nextBtn').disabled = true;
+            }
+        }
+
+        function selectOption(index, type) {
+            const options = document.querySelectorAll('.option');
+            
+            if (type === 'radio') {
+                options.forEach(opt => opt.classList.remove('selected'));
+                options[index].classList.add('selected');
+                document.getElementById('option' + index).checked = true;
+                answers[currentQuestion] = index;
+            } else {
+                options[index].classList.toggle('selected');
+                const checkbox = document.getElementById('option' + index);
+                checkbox.checked = !checkbox.checked;
+                
+                const selected = [];
+                document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+                    selected.push(parseInt(cb.value));
+                });
+                answers[currentQuestion] = selected;
+            }
+
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showEmailGate();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        function showEmailGate() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('email-screen').classList.remove('hidden');
+            document.getElementById('progress').style.width = '100%';
+        }
+
+        function submitEmail() {
+            const email = document.getElementById('emailInput').value;
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('email-screen').classList.add('hidden');
+            document.getElementById('loading-screen').classList.remove('hidden');
+
+            // Calculate scores
+            calculateScores();
+
+            // Simulate processing time
+            setTimeout(() => {
+                showResults();
+            }, 2000);
+        }
+
+        function calculateScores() {
+            scores = { anxious: 0, avoidant: 0, secure: 0 };
+
+            answers.forEach((answer, qIndex) => {
+                const question = questions[qIndex];
+                
+                if (Array.isArray(answer)) {
+                    // Checkbox question
+                    answer.forEach(optionIndex => {
+                        const option = question.options[optionIndex];
+                        if (option.anxious) scores.anxious += option.anxious;
+                        if (option.avoidant) scores.avoidant += option.avoidant;
+                        if (option.secure) scores.secure += option.secure;
+                    });
+                } else {
+                    // Radio question
+                    const option = question.options[answer];
+                    if (option.anxious) scores.anxious += option.anxious;
+                    if (option.avoidant) scores.avoidant += option.avoidant;
+                    if (option.secure) scores.secure += option.secure;
+                }
+            });
+        }
+
+        function showResults() {
+            document.getElementById('loading-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+
+            document.getElementById('anxiousScore').textContent = scores.anxious;
+            document.getElementById('avoidantScore').textContent = scores.avoidant;
+            document.getElementById('secureScore').textContent = scores.secure;
+
+            let resultTitle = '';
+            let resultDescription = '';
+
+            // NEW LOGIC: Decision tree checks categories in priority order
+            
+            // Category 1: SECURE (must be highest score and ≥15)
+            if (scores.secure >= 15 && scores.secure > scores.anxious && scores.secure > scores.avoidant) {
+                resultTitle = "You're Secure (But Your Partner Might Not Be)";
+                resultDescription = `
+                    <h3>What This Means:</h3>
+                    <p>You have secure attachment tendencies. You:</p>
+                    <ul>
+                        <li>Communicate your needs clearly</li>
+                        <li>Give space without panic</li>
+                        <li>Stay during conflict</li>
+                        <li>Have healthy boundaries</li>
+                    </ul>
+                    
+                    <h3>So Why Are You Here?</h3>
+                    <p>Because you're with someone who ISN'T secure, or you're healing from past insecure patterns.</p>
+                    
+                    <h3>The Truth:</h3>
+                    <p>Secure people can handle avoidant partners better than anxious people can. But "better" doesn't mean "good."</p>
+                    
+                    <h3>Your Question:</h3>
+                    <p>"Can I love them into security?"</p>
+                    <p><strong>Answer: No.</strong></p>
+                    <p>Ask yourself: Am I happy with THIS version of them? Or am I waiting for who they could become?</p>
+                `;
+            }
+            // Category 2: FEARFUL-AVOIDANT (high in BOTH)
+            else if (scores.anxious >= 22 && scores.avoidant >= 22) {
+                resultTitle = "You're Fearful-Avoidant (Disorganized)";
+                resultDescription = `
+                    <h3>What This Means:</h3>
+                    <p>You have BOTH anxious AND avoidant traits. The internal battle:</p>
+                    <ul>
+                        <li>You crave intimacy but fear it</li>
+                        <li>You want them close but run when they get there</li>
+                        <li>You're terrified of abandonment AND engulfment</li>
+                    </ul>
+                    
+                    <p><strong>This is the rarest and most painful attachment style.</strong></p>
+                    
+                    <h3>Why You Feel Confused:</h3>
+                    <p>Your nervous system is at war with itself. The anxious side says "Please don't leave me" while the avoidant side says "Please don't suffocate me."</p>
+                    
+                    <h3>What You Need:</h3>
+                    <p><strong>This requires professional help.</strong> Fearful-avoidant often stems from complex trauma. Consider trauma-informed therapy, somatic work, and possibly EMDR.</p>
+                    
+                    <h3>Episodes You NEED:</h3>
+                    <ul>
+                        <li>ALL 12 EPISODES</li>
+                        <li>Episode 4: Understanding Your Brain</li>
+                        <li>Episode 9: Can You Change?</li>
+                        <li>Episode 10: Breaking The Cycle</li>
+                    </ul>
+                `;
+            }
+            // Category 3: ANXIOUS-AVOIDANT TRAP (very high anxious + moderate avoidant)
+            else if (scores.anxious >= 28 && scores.avoidant >= 12 && scores.avoidant <= 21) {
+                resultTitle = "🚨 You're IN The Anxious-Avoidant Trap";
+                resultDescription = `
+                    <h3>What This Means:</h3>
+                    <p><strong>You're in the most toxic dynamic in attachment theory.</strong></p>
+                    <p>You: Anxious attachment<br>Them: Avoidant attachment<br>Together: Disaster</p>
+                    
+                    <h3>The Cycle:</h3>
+                    <ul>
+                        <li>They pull away → You chase</li>
+                        <li>You chase → They retreat</li>
+                        <li>They retreat → You panic</li>
+                        <li>You panic → They shut down</li>
+                    </ul>
+                    <p><strong>This can last YEARS.</strong></p>
+                    
+                    <h3>Why You're Developing Avoidant Traits:</h3>
+                    <p>The pain is making you protect yourself. You're starting to pull away too—not because you're avoidant, but because you're exhausted.</p>
+                    
+                    <h3>The Brutal Truth:</h3>
+                    <p>This won't get better without BOTH of you doing serious work.</p>
+                    
+                    <h3>You CANNOT Miss:</h3>
+                    <ul>
+                        <li>ALL 12 EPISODES</li>
+                        <li>Especially Episode 6: Avoidant vs. Not Interested</li>
+                        <li>Episode 9: Can They Change?</li>
+                        <li>Episode 11: When To Walk Away</li>
+                    </ul>
+                `;
+            }
+            // Category 4: CLASSIC ANXIOUS ATTACHMENT
+            else if (scores.anxious >= 20 && scores.avoidant < 12) {
+                resultTitle = "You Have Classic Anxious Attachment";
+                resultDescription = `
+                    <h3>What This Means:</h3>
+                    <p>You're the person who:</p>
+                    <ul>
+                        <li>Checks phone constantly waiting for their text</li>
+                        <li>Replays every conversation obsessively</li>
+                        <li>Feels panic when they pull away</li>
+                        <li>Sacrifices your needs to keep them close</li>
+                        <li>Attracts emotionally unavailable people</li>
+                    </ul>
+                    
+                    <h3>The Truth:</h3>
+                    <p><strong>You're not "too needy."</strong> Your nervous system learned that love is conditional and must be earned. So you chase, over-give, and sacrifice yourself trying to prove you're worthy.</p>
+                    
+                    <h3>Why You Feel Crazy:</h3>
+                    <p>Your brain is experiencing <strong>intermittent reinforcement</strong>—the same mechanism that makes gambling addictive. Sometimes they're warm (dopamine hit), sometimes they're cold (panic). Your brain gets HOOKED trying to crack the code.</p>
+                    
+                    <h3>Episodes You NEED:</h3>
+                    <ul>
+                        <li>Episode 2: Why Your Brain Is Addicted</li>
+                        <li>Episode 3: You're Not "Too Needy"</li>
+                        <li>Episode 8: What You Can Control</li>
+                        <li>Episode 12: Stop Attracting Avoidants</li>
+                    </ul>
+                `;
+            }
+            // Category 5: AVOIDANT ATTACHMENT
+            else if (scores.avoidant >= 20 && scores.anxious < 12) {
+                resultTitle = "You Have Avoidant Attachment";
+                resultDescription = `
+                    <h3>What This Means:</h3>
+                    <p>You're the person who:</p>
+                    <ul>
+                        <li>Needs space after intimacy</li>
+                        <li>Feels suffocated by their needs</li>
+                        <li>Pulls away when they get close</li>
+                        <li>Values independence over connection</li>
+                        <li>Shuts down during conflict</li>
+                    </ul>
+                    
+                    <h3>The Truth:</h3>
+                    <p><strong>You're not cold or broken.</strong> Your nervous system learned that intimacy = losing yourself. So you create distance to survive.</p>
+                    
+                    <h3>Why They Feel Crazy:</h3>
+                    <p>Every time they get close, you pull away. To you: self-protection. To them: rejection. You're not trying to hurt them. But you are.</p>
+                    
+                    <h3>Episodes You NEED:</h3>
+                    <ul>
+                        <li>Episode 4: What Happens In Your Brain</li>
+                        <li>Episode 6: Avoidant vs. Not Interested</li>
+                        <li>Episode 9: Can You Change?</li>
+                        <li>Episode 11: When To Walk Away</li>
+                    </ul>
+                `;
+            }
+            // Category 6: BECOMING SECURE (default/healing)
+            else {
+                resultTitle = "You're Becoming Secure (Healing In Progress)";
+                resultDescription = `
+                    <h3>What This Means:</h3>
+                    <p>You're in transition. You had anxious or avoidant patterns, but you're doing the work.</p>
+                    
+                    <h3>Signs You're Healing:</h3>
+                    <ul>
+                        <li>You notice your patterns</li>
+                        <li>You pause before reacting</li>
+                        <li>You communicate more clearly</li>
+                        <li>You choose better partners</li>
+                        <li>You leave toxic situations faster</li>
+                    </ul>
+                    
+                    <p><strong>You're not fully secure yet. But you're on the path. This is HARD work. You're doing it.</strong></p>
+                    
+                    <h3>Keep Going:</h3>
+                    <p>Continue therapy, self-awareness practices, boundary setting, and choosing emotionally available people. Your nervous system is rewiring. Don't undo the work.</p>
+                    
+                    <h3>Episodes That Will Help:</h3>
+                    <ul>
+                        <li>Episode 8: What You Can Control</li>
+                        <li>Episode 10: Breaking The Cycle</li>
+                        <li>Episode 12: Moving Forward</li>
+                    </ul>
+                `;
+            }
+
+            document.getElementById('resultTitle').textContent = resultTitle;
+            document.getElementById('resultDescription').innerHTML = resultDescription;
+        }
+    </script>
+</body>
+</html>
