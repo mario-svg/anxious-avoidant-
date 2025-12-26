@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What's Your Attachment Pattern? | Quiz</title>
+    <title>What's Your Attachment Pattern? | Complete Quiz</title>
     <style>
         * {
             margin: 0;
@@ -27,7 +27,7 @@
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 600px;
+            max-width: 700px;
             width: 100%;
             padding: 40px;
             position: relative;
@@ -54,6 +54,7 @@
             color: #666;
             font-size: 14px;
             margin-bottom: 10px;
+            font-weight: 600;
         }
 
         h1 {
@@ -114,7 +115,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             min-height: 56px;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
@@ -126,9 +127,9 @@
             transform: translateX(5px);
         }
 
-        .option input[type="radio"],
-        .option input[type="checkbox"] {
+        .option input[type="radio"] {
             margin-right: 12px;
+            margin-top: 3px;
             width: 20px;
             height: 20px;
             cursor: pointer;
@@ -262,13 +263,22 @@
             border-radius: 30px;
             font-weight: 600;
             margin-bottom: 20px;
+            font-size: 14px;
         }
 
         .result-title {
-            font-size: 32px;
+            font-size: 28px;
             color: #2d3748;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .result-tagline {
+            font-size: 18px;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-weight: 600;
         }
 
         .scores {
@@ -276,6 +286,7 @@
             gap: 15px;
             justify-content: center;
             margin: 30px 0;
+            flex-wrap: wrap;
         }
 
         .score-box {
@@ -283,11 +294,12 @@
             padding: 20px;
             border-radius: 12px;
             flex: 1;
+            min-width: 120px;
             max-width: 150px;
         }
 
         .score-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #718096;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -310,14 +322,23 @@
         .result-description h3 {
             color: #2d3748;
             margin: 25px 0 15px;
+            font-size: 20px;
+        }
+
+        .result-description p {
+            margin: 15px 0;
         }
 
         .result-description ul, .result-description ol {
-            margin-left: 20px;
+            margin: 15px 0 15px 20px;
         }
 
         .result-description li {
             margin: 8px 0;
+        }
+
+        .result-description strong {
+            color: #2d3748;
         }
 
         .cta-box {
@@ -326,10 +347,16 @@
             padding: 30px;
             border-radius: 12px;
             margin-top: 30px;
+            text-align: left;
         }
 
         .cta-box h3 {
             margin-bottom: 15px;
+        }
+
+        .cta-box p {
+            margin: 8px 0;
+            line-height: 1.6;
         }
 
         @media (max-width: 600px) {
@@ -338,33 +365,28 @@
             }
 
             .quiz-container {
-                padding: 20px;
+                padding: 25px;
                 border-radius: 15px;
             }
 
             h1 {
-                font-size: 22px;
-                margin-bottom: 12px;
+                font-size: 24px;
             }
 
             .subtitle {
                 font-size: 14px;
-                margin-bottom: 20px;
             }
 
             .question-text {
-                font-size: 17px;
-                margin-bottom: 20px;
+                font-size: 18px;
             }
 
             .option {
                 padding: 14px 16px;
-                font-size: 15px;
             }
 
             .option label {
                 font-size: 15px;
-                line-height: 1.4;
             }
 
             button {
@@ -372,69 +394,24 @@
                 font-size: 15px;
             }
 
-            .buttons {
-                gap: 10px;
-                margin-top: 25px;
-            }
-
-            .scores {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .score-box {
-                max-width: 100%;
-                padding: 16px;
-            }
-
             .result-title {
-                font-size: 24px;
-                line-height: 1.3;
+                font-size: 22px;
+            }
+
+            .result-tagline {
+                font-size: 16px;
             }
 
             .result-description {
                 font-size: 15px;
-                line-height: 1.7;
             }
 
-            .result-description h3 {
-                font-size: 18px;
-                margin: 20px 0 12px;
+            .scores {
+                flex-direction: column;
             }
 
-            .cta-box {
-                padding: 20px;
-            }
-
-            .cta-box h3 {
-                font-size: 18px;
-            }
-
-            .cta-box p {
-                font-size: 14px;
-                line-height: 1.6;
-            }
-
-            .benefits {
-                padding: 16px;
-                margin-bottom: 20px;
-            }
-
-            .benefits p {
-                font-size: 14px;
-            }
-
-            .email-gate h2 {
-                font-size: 20px;
-            }
-
-            .email-gate p {
-                font-size: 14px;
-            }
-
-            input[type="email"] {
-                padding: 14px;
-                font-size: 15px;
+            .score-box {
+                max-width: 100%;
             }
         }
     </style>
@@ -444,15 +421,15 @@
         <!-- Welcome Screen -->
         <div id="welcome-screen">
             <h1>What's Your Attachment Pattern?</h1>
-            <p class="subtitle">Take this 3-minute quiz to find out which of the 6 patterns you're running.</p>
+            <p class="subtitle">Discover which of the 6 patterns you're running and what to do about it.</p>
             
             <div class="benefits">
-                <p>Your exact attachment style</p>
+                <p>Your exact attachment pattern</p>
                 <p>Why you feel the way you do</p>
-                <p>What to do next</p>
+                <p>What you need to change</p>
             </div>
 
-            <p style="color: #718096; margin-bottom: 30px;"><strong>15 questions. Brutally honest results.</strong></p>
+            <p style="color: #718096; margin-bottom: 30px;"><strong>23 questions. 5 minutes. Life-changing results.</strong></p>
 
             <button class="btn-primary" onclick="startQuiz()">START QUIZ</button>
         </div>
@@ -476,14 +453,14 @@
         <!-- Email Gate -->
         <div id="email-screen" class="hidden">
             <div class="email-gate">
-                <h2>📊 Calculating Your Results...</h2>
+                <h2>📊 Calculating Your Pattern...</h2>
                 <p>Enter your email to see your personalized results</p>
                 
                 <div class="benefits" style="text-align: left;">
                     <p>Your attachment pattern breakdown</p>
                     <p>Why you feel the way you do</p>
                     <p>Personalized action plan</p>
-                    <p>Access to the full 12-episode series</p>
+                    <p>Access to the 12-episode series</p>
                 </div>
 
                 <input type="email" id="emailInput" placeholder="your@email.com" required>
@@ -495,15 +472,16 @@
         <div id="loading-screen" class="hidden">
             <div class="loading">
                 <div class="spinner"></div>
-                <h2>Analyzing your responses...</h2>
+                <h2>Analyzing your attachment pattern...</h2>
             </div>
         </div>
 
         <!-- Results Screen -->
         <div id="results-screen" class="hidden">
             <div class="result-container">
-                <div class="result-badge">YOUR RESULTS</div>
+                <div class="result-badge">YOUR ATTACHMENT PATTERN</div>
                 <h2 class="result-title" id="resultTitle"></h2>
+                <p class="result-tagline" id="resultTagline"></p>
                 
                 <div class="scores">
                     <div class="score-box">
@@ -526,7 +504,7 @@
                     <h3>What Happens Next:</h3>
                     <p>✅ Episode 1 drops tomorrow at 6pm</p>
                     <p>✅ Follow @bloombymimi on Instagram</p>
-                    <p>✅ Save the series - Don't miss any episodes</p>
+                    <p>✅ Watch all 12 episodes to understand your pattern</p>
                 </div>
             </div>
         </div>
@@ -534,201 +512,277 @@
 
     <script>
         const questions = [
+            // ANXIOUS (Q1-4)
             {
                 id: 1,
-                text: "When your partner needs space, you typically:",
-                type: "radio",
+                text: "When they don't respond for a few hours, you:",
                 options: [
-                    { text: "Feel immediate panic and try to fix whatever's wrong", anxious: 3 },
-                    { text: "Give them space but feel anxious the entire time", anxious: 2 },
-                    { text: "Feel relieved and use the time for yourself", secure: 2 },
-                    { text: "Feel confused about whether they still want you", anxious: 2, avoidant: 1 },
-                    { text: "Don't really notice or care much", avoidant: 3 }
+                    { text: "Check my phone constantly and spiral about what I did wrong", anxious: 3 },
+                    { text: "Feel slightly worried but stay busy", anxious: 1, secure: 1 },
+                    { text: "Assume they're busy and continue my day", secure: 2 },
+                    { text: "Feel relieved I have some space", avoidant: 2 },
+                    { text: "Panic they're leaving BUT also want distance", fearful: 1 }
                 ]
             },
             {
                 id: 2,
-                text: "How often do you check your phone waiting for their text?",
-                type: "radio",
+                text: "After a great date, your first thought is:",
                 options: [
-                    { text: "Never or rarely", avoidant: 2 },
-                    { text: "Occasionally", secure: 1 },
-                    { text: "Sometimes", secure: 1 },
-                    { text: "Often", anxious: 2 },
-                    { text: "Very frequently", anxious: 2 },
-                    { text: "Almost constantly", anxious: 3 },
-                    { text: "Constantly - it's the first thing I do", anxious: 3 }
+                    { text: '"I hope they still like me tomorrow"', anxious: 3 },
+                    { text: '"That was nice, looking forward to next time"', secure: 2 },
+                    { text: '"Did I say something wrong? Was I too much?"', anxious: 3 },
+                    { text: '"I need some alone time now"', avoidant: 2 },
+                    { text: '"That was great but now I feel overwhelmed"', fearful: 1 }
                 ]
             },
             {
                 id: 3,
-                text: "After a really great date or deep conversation, you usually:",
-                type: "radio",
+                text: "When you sense distance from them, you:",
                 options: [
-                    { text: "Feel excited and want more closeness immediately", anxious: 2 },
-                    { text: "Feel warm but slightly nervous about what comes next", anxious: 1, secure: 1 },
-                    { text: "Feel good and look forward to seeing them again", secure: 2 },
-                    { text: "Feel overwhelmed and need to pull back", avoidant: 3 },
-                    { text: "Start analyzing if you said something wrong", anxious: 3 }
+                    { text: "Immediately try to fix it and close the gap", anxious: 3 },
+                    { text: "Overgive and sacrifice my needs to keep them close", anxious: 3 },
+                    { text: "Give them space and check in later", secure: 2 },
+                    { text: "Match their distance and pull back too", avoidant: 2 },
+                    { text: "Panic then retreat then panic again", fearful: 1 }
                 ]
             },
             {
                 id: 4,
-                text: "When they don't text back for several hours, your first thought is:",
-                type: "radio",
+                text: "Your internal dialogue sounds like:",
                 options: [
-                    { text: "They're probably busy, they'll respond when they can", secure: 2 },
-                    { text: "What did I do wrong?", anxious: 3 },
-                    { text: "Thank god, I needed a break anyway", avoidant: 2 },
-                    { text: "They're losing interest, I can feel it", anxious: 3 },
-                    { text: "Are they testing me?", anxious: 2 }
+                    { text: '"Am I too needy? What if they leave?"', anxious: 3 },
+                    { text: '"I need to earn their love and prove my worth"', anxious: 3 },
+                    { text: '"I trust this will work out"', secure: 2 },
+                    { text: '"I need to protect my independence"', avoidant: 2 },
+                    { text: '"I want them close but it feels dangerous"', fearful: 1 }
                 ]
             },
+            // AVOIDANT (Q5-8)
             {
                 id: 5,
-                text: "In past relationships, you typically:",
-                type: "radio",
+                text: "After an intimate/vulnerable moment, you:",
                 options: [
-                    { text: "Leave when things get too serious", avoidant: 3 },
-                    { text: "Stay way too long hoping they'll change", anxious: 3 },
-                    { text: "End things when it's clearly not working", secure: 2 },
-                    { text: "Get left by people who say you're 'too intense'", anxious: 2 },
-                    { text: "Sabotage things when they get too close", avoidant: 3 }
+                    { text: "Feel warm and want more closeness", secure: 2 },
+                    { text: "Feel happy but slightly nervous", anxious: 1, secure: 1 },
+                    { text: "Feel overwhelmed and need to create distance", avoidant: 3 },
+                    { text: "Feel trapped and suffocated", avoidant: 3 },
+                    { text: "Want closeness then immediately panic", fearful: 1 }
                 ]
             },
             {
                 id: 6,
-                text: "When they pull away emotionally, you: (Select all that apply)",
-                type: "checkbox",
+                text: 'When they say "I need you," you:',
                 options: [
-                    { text: "Panic and try to fix it immediately", anxious: 2 },
-                    { text: "Blame yourself for doing something wrong", anxious: 2 },
-                    { text: "Feel relieved they're giving you space", avoidant: 2 },
-                    { text: "Overanalyze every interaction to find the problem", anxious: 2 },
-                    { text: "Pull away even harder yourself", avoidant: 2 },
-                    { text: "Feel confused but give them time", secure: 1 },
-                    { text: "Don't really notice or care", avoidant: 3 }
+                    { text: "Feel loved and secure", secure: 2 },
+                    { text: "Feel needed and wanted", anxious: 1 },
+                    { text: "Feel pressure and want to run", avoidant: 3 },
+                    { text: "Feel like I'm losing myself", avoidant: 3 },
+                    { text: "Feel both wanted and trapped", fearful: 1 }
                 ]
             },
             {
                 id: 7,
-                text: "How comfortable are you expressing your needs in relationships?",
-                type: "radio",
+                text: "Your relationship comfort zone is:",
                 options: [
-                    { text: "I never express needs", avoidant: 3 },
-                    { text: "Very uncomfortable", avoidant: 3 },
-                    { text: "Somewhat uncomfortable", anxious: 1, avoidant: 1 },
-                    { text: "Neutral", anxious: 1, avoidant: 1 },
-                    { text: "Somewhat comfortable", secure: 2 },
-                    { text: "Comfortable", secure: 2 },
-                    { text: "Very comfortable", secure: 2 }
+                    { text: "Deep emotional intimacy and vulnerability", secure: 2 },
+                    { text: "Close but with constant reassurance", anxious: 1 },
+                    { text: "Independent with lots of personal space", avoidant: 3 },
+                    { text: "I value freedom over connection", avoidant: 3 },
+                    { text: "I want both but can't have either", fearful: 1 }
                 ]
             },
             {
                 id: 8,
-                text: "When you're upset with them, you typically:",
-                type: "radio",
+                text: 'When they want to "talk about us," you:',
                 options: [
-                    { text: "Tell them immediately what's bothering you", secure: 2 },
-                    { text: "Bottle it up and hope it goes away", avoidant: 2 },
-                    { text: "Drop hints hoping they'll notice", anxious: 2 },
-                    { text: "Shut down and create distance", avoidant: 3 },
-                    { text: "Overthink it but eventually communicate", anxious: 1, secure: 1 }
+                    { text: "I'm open and ready to discuss", secure: 2 },
+                    { text: "I feel anxious but willing", anxious: 1 },
+                    { text: "I shut down and want to avoid it", avoidant: 3 },
+                    { text: "I feel cornered and create distance", avoidant: 3 },
+                    { text: "I want to but freeze up", fearful: 1 }
                 ]
             },
+            // TRAP (Q9-11)
             {
                 id: 9,
-                text: "The idea of fully merging your life with someone makes you feel:",
-                type: "radio",
+                text: "The pattern in your relationship:",
                 options: [
-                    { text: "Excited and hopeful", secure: 2 },
-                    { text: "Terrified of losing yourself", avoidant: 2 },
-                    { text: "Happy but want to take it slow", secure: 2 },
-                    { text: "Desperate to make it happen fast", anxious: 3 },
-                    { text: "Suffocated just thinking about it", avoidant: 3 }
+                    { text: "We both communicate and meet in the middle", secure: 2 },
+                    { text: "I pursue closeness, they pull away", trap: 3, anxious: 2 },
+                    { text: "They pursue closeness, I pull away", trap: 3, avoidant: 2 },
+                    { text: "I chase then run then chase again", fearful: 2 },
+                    { text: "We're both independent and that works", avoidant: 1 }
                 ]
             },
             {
                 id: 10,
-                text: "When they're inconsistent with communication, you:",
-                type: "radio",
+                text: "When conflict happens:",
                 options: [
-                    { text: "Accept it as their communication style", secure: 1, avoidant: 1 },
-                    { text: "Feel anxious and check your phone constantly", anxious: 3 },
-                    { text: "Match their energy and pull back too", avoidant: 2 },
-                    { text: "Bring it up calmly and ask about it", secure: 2 },
-                    { text: "Assume they're not interested anymore", anxious: 2 }
+                    { text: "We discuss it calmly together", secure: 2 },
+                    { text: "I try to resolve it, they shut down", trap: 3, anxious: 2 },
+                    { text: "They want to talk, I withdraw", trap: 3, avoidant: 2 },
+                    { text: "We both escalate then distance", fearful: 1 },
+                    { text: "We avoid it completely", avoidant: 1 }
                 ]
             },
             {
                 id: 11,
-                text: "How often do you sacrifice your own needs to keep the peace?",
-                type: "radio",
+                text: "Your relationship dynamic feels like:",
                 options: [
-                    { text: "Never", avoidant: 2 },
-                    { text: "Rarely", avoidant: 2 },
-                    { text: "Sometimes", secure: 1 },
-                    { text: "Often", anxious: 3 },
-                    { text: "Very often", anxious: 3 },
-                    { text: "Almost always", anxious: 3 },
-                    { text: "Always", anxious: 3 }
+                    { text: "Two secure partners growing together", secure: 2 },
+                    { text: "I'm always the one chasing and initiating", trap: 3, anxious: 2 },
+                    { text: "I'm always the one creating distance", trap: 3, avoidant: 2 },
+                    { text: "A constant push-pull that exhausts us both", fearful: 2 },
+                    { text: "Two independent people coexisting", avoidant: 1 }
                 ]
             },
+            // FEARFUL (Q12-15)
             {
                 id: 12,
-                text: "When they're going through something difficult, you:",
-                type: "radio",
+                text: "Your biggest internal conflict:",
                 options: [
-                    { text: "Want to be there for them but give them space to ask", secure: 2 },
-                    { text: "Feel helpless and overwhelmed by their emotions", anxious: 2 },
-                    { text: "Jump in immediately to fix everything", anxious: 3 },
-                    { text: "Feel uncomfortable and create distance", avoidant: 3 },
-                    { text: "Support them but maintain your own boundaries", secure: 2 }
+                    { text: "I fear abandonment above all else", anxious: 2 },
+                    { text: "I fear losing my independence", avoidant: 2 },
+                    { text: "I desperately want love BUT it terrifies me", fearful: 3 },
+                    { text: "I want them close but panic when they get there", fearful: 3 },
+                    { text: "I feel balanced in my needs", secure: 2 }
                 ]
             },
             {
                 id: 13,
-                text: "How often do you replay conversations analyzing what went wrong?",
-                type: "radio",
+                text: "Your pattern in relationships:",
                 options: [
-                    { text: "Never", avoidant: 2 },
-                    { text: "Rarely", avoidant: 2 },
-                    { text: "Sometimes", secure: 1 },
-                    { text: "Often", anxious: 3 },
-                    { text: "Very often", anxious: 3 },
-                    { text: "Almost constantly", anxious: 3 },
-                    { text: "Constantly - I can't stop", anxious: 3 }
+                    { text: "I'm consistently anxious throughout", anxious: 1 },
+                    { text: "I'm consistently avoidant throughout", avoidant: 1 },
+                    { text: "I chase then run then chase again", fearful: 3 },
+                    { text: "I want intimacy then feel suffocated by it", fearful: 3 },
+                    { text: "I stay stable and grounded", secure: 2 }
                 ]
             },
             {
                 id: 14,
-                text: "In the relationship, you typically:",
-                type: "radio",
+                text: "You feel:",
                 options: [
-                    { text: "Chase them for attention and reassurance", anxious: 3 },
-                    { text: "Run when things get too intimate", avoidant: 3 },
-                    { text: "Have a balanced give and take", secure: 2 },
-                    { text: "Over-give hoping they'll love you more", anxious: 3 },
-                    { text: "Withdraw when they need you most", avoidant: 3 }
+                    { text: "Safe with emotional closeness", secure: 2 },
+                    { text: "Unsafe without constant reassurance", anxious: 1 },
+                    { text: "Unsafe with too much closeness", avoidant: 1 },
+                    { text: "Unsafe both WITH and WITHOUT closeness", fearful: 3 },
+                    { text: "Like you have two people fighting inside you", fearful: 3 }
                 ]
             },
             {
                 id: 15,
-                text: "The relationship pattern you notice most in your life:",
-                type: "radio",
+                text: "Your biggest fear is:",
                 options: [
-                    { text: "I attract emotionally unavailable people", anxious: 3 },
-                    { text: "People say I'm too distant or cold", avoidant: 2 },
-                    { text: "I have mostly healthy, balanced relationships", secure: 2 },
-                    { text: "I'm always the one who cares more", anxious: 3 },
-                    { text: "I leave right when things get good", avoidant: 3 }
+                    { text: "Being abandoned", anxious: 2 },
+                    { text: "Being engulfed", avoidant: 2 },
+                    { text: "BOTH abandonment AND engulfment simultaneously", fearful: 3 },
+                    { text: "Neither, I trust relationships", secure: 2 },
+                    { text: "I used to fear both but I'm healing", becomingSecure: 2 }
+                ]
+            },
+            // SECURE (Q16-19)
+            {
+                id: 16,
+                text: "During conflict, you:",
+                options: [
+                    { text: "Panic and try to fix it immediately", anxious: 2 },
+                    { text: "Shut down and create distance", avoidant: 2 },
+                    { text: "Stay calm, express needs clearly, work through it", secure: 3 },
+                    { text: "Set boundaries without guilt or fear", secure: 3 },
+                    { text: "Want to but freeze completely", fearful: 1 }
+                ]
+            },
+            {
+                id: 17,
+                text: "When they need space, you:",
+                options: [
+                    { text: "Panic that they're leaving", anxious: 2 },
+                    { text: "Feel relieved and enjoy my time", avoidant: 2 },
+                    { text: "Give them space without taking it personally", secure: 3 },
+                    { text: "Respect it and stay grounded in myself", secure: 3 },
+                    { text: "Feel both panicked and relieved", fearful: 1 }
+                ]
+            },
+            {
+                id: 18,
+                text: "Your boundaries are:",
+                options: [
+                    { text: "Weak, I sacrifice myself for them", anxious: 2 },
+                    { text: "Rigid, I keep them at distance", avoidant: 2 },
+                    { text: "Clear, consistent, and communicated kindly", secure: 3 },
+                    { text: "Healthy, without guilt or fear", secure: 3 },
+                    { text: "I don't know what my boundaries are", fearful: 1 }
+                ]
+            },
+            {
+                id: 19,
+                text: "You can:",
+                options: [
+                    { text: "Need them to feel complete", anxious: 1 },
+                    { text: "Only feel safe alone", avoidant: 1 },
+                    { text: "Be close AND maintain your own identity", secure: 3 },
+                    { text: "Give space AND stay emotionally connected", secure: 3 },
+                    { text: "Want both but achieve neither", fearful: 1 }
+                ]
+            },
+            // BECOMING SECURE (Q20-23)
+            {
+                id: 20,
+                text: "Compared to a year ago:",
+                options: [
+                    { text: "I still react the same way to triggers", none: 0 },
+                    { text: "I see the patterns but can't stop them", becomingSecure: 1 },
+                    { text: "I pause before reacting now", becomingSecure: 3 },
+                    { text: "I self-soothe instead of seeking external validation", becomingSecure: 3 },
+                    { text: "I don't see any patterns", none: 0 }
+                ]
+            },
+            {
+                id: 21,
+                text: "When triggered now, you:",
+                options: [
+                    { text: "Still spiral and chase/withdraw", none: 0 },
+                    { text: "Notice it but can't stop it", becomingSecure: 1 },
+                    { text: "Catch yourself mid-pattern and choose differently", becomingSecure: 3 },
+                    { text: "Breathe, ground yourself, then respond calmly", becomingSecure: 3 },
+                    { text: "Don't notice when I'm triggered", none: 0 }
+                ]
+            },
+            {
+                id: 22,
+                text: "Your partner choices:",
+                options: [
+                    { text: "Still attracted to the same unavailable people", none: 0 },
+                    { text: "Attracted to them but choose differently now", becomingSecure: 2 },
+                    { text: "Choose emotionally available partners now", becomingSecure: 3 },
+                    { text: "Walk away from red flags early", becomingSecure: 3 },
+                    { text: "Don't see patterns in who I choose", none: 0 }
+                ]
+            },
+            {
+                id: 23,
+                text: "Your healing journey:",
+                options: [
+                    { text: "I haven't started working on myself", none: 0 },
+                    { text: "I'm aware but not taking action", becomingSecure: 1 },
+                    { text: "I'm doing therapy, self-work, nervous system regulation", becomingSecure: 3 },
+                    { text: "I notice progress even though I still get triggered", becomingSecure: 3 },
+                    { text: "I don't think I need to change", none: 0 }
                 ]
             }
         ];
 
         let currentQuestion = 0;
         let answers = [];
-        let scores = { anxious: 0, avoidant: 0, secure: 0 };
+        let scores = { 
+            anxious: 0, 
+            avoidant: 0, 
+            trap: 0, 
+            fearful: 0, 
+            secure: 0, 
+            becomingSecure: 0 
+        };
 
         function startQuiz() {
             document.getElementById('welcome-screen').classList.add('hidden');
@@ -750,10 +804,10 @@
             q.options.forEach((option, index) => {
                 const optionDiv = document.createElement('div');
                 optionDiv.className = 'option';
-                optionDiv.onclick = () => selectOption(index, q.type);
+                optionDiv.onclick = () => selectOption(index);
 
                 const input = document.createElement('input');
-                input.type = q.type;
+                input.type = 'radio';
                 input.name = 'question' + q.id;
                 input.id = 'option' + index;
                 input.value = index;
@@ -777,46 +831,26 @@
             // Update next button text
             if (currentQuestion === questions.length - 1) {
                 document.getElementById('nextBtn').textContent = 'SEE RESULTS →';
+            } else {
+                document.getElementById('nextBtn').textContent = 'NEXT →';
             }
 
             // Restore previous answers
-            if (answers[currentQuestion]) {
-                const savedAnswers = answers[currentQuestion];
-                if (Array.isArray(savedAnswers)) {
-                    savedAnswers.forEach(idx => {
-                        document.getElementById('option' + idx).checked = true;
-                        document.querySelectorAll('.option')[idx].classList.add('selected');
-                    });
-                } else {
-                    document.getElementById('option' + savedAnswers).checked = true;
-                    document.querySelectorAll('.option')[savedAnswers].classList.add('selected');
-                }
+            if (answers[currentQuestion] !== undefined) {
+                document.getElementById('option' + answers[currentQuestion]).checked = true;
+                document.querySelectorAll('.option')[answers[currentQuestion]].classList.add('selected');
                 document.getElementById('nextBtn').disabled = false;
             } else {
                 document.getElementById('nextBtn').disabled = true;
             }
         }
 
-        function selectOption(index, type) {
+        function selectOption(index) {
             const options = document.querySelectorAll('.option');
-            
-            if (type === 'radio') {
-                options.forEach(opt => opt.classList.remove('selected'));
-                options[index].classList.add('selected');
-                document.getElementById('option' + index).checked = true;
-                answers[currentQuestion] = index;
-            } else {
-                options[index].classList.toggle('selected');
-                const checkbox = document.getElementById('option' + index);
-                checkbox.checked = !checkbox.checked;
-                
-                const selected = [];
-                document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
-                    selected.push(parseInt(cb.value));
-                });
-                answers[currentQuestion] = selected;
-            }
-
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[index].classList.add('selected');
+            document.getElementById('option' + index).checked = true;
+            answers[currentQuestion] = index;
             document.getElementById('nextBtn').disabled = false;
         }
 
@@ -863,26 +897,18 @@
         }
 
         function calculateScores() {
-            scores = { anxious: 0, avoidant: 0, secure: 0 };
+            scores = { anxious: 0, avoidant: 0, trap: 0, fearful: 0, secure: 0, becomingSecure: 0 };
 
-            answers.forEach((answer, qIndex) => {
+            answers.forEach((answerIndex, qIndex) => {
                 const question = questions[qIndex];
+                const option = question.options[answerIndex];
                 
-                if (Array.isArray(answer)) {
-                    // Checkbox question
-                    answer.forEach(optionIndex => {
-                        const option = question.options[optionIndex];
-                        if (option.anxious) scores.anxious += option.anxious;
-                        if (option.avoidant) scores.avoidant += option.avoidant;
-                        if (option.secure) scores.secure += option.secure;
-                    });
-                } else {
-                    // Radio question
-                    const option = question.options[answer];
-                    if (option.anxious) scores.anxious += option.anxious;
-                    if (option.avoidant) scores.avoidant += option.avoidant;
-                    if (option.secure) scores.secure += option.secure;
-                }
+                if (option.anxious) scores.anxious += option.anxious;
+                if (option.avoidant) scores.avoidant += option.avoidant;
+                if (option.trap) scores.trap += option.trap;
+                if (option.fearful) scores.fearful += option.fearful;
+                if (option.secure) scores.secure += option.secure;
+                if (option.becomingSecure) scores.becomingSecure += option.becomingSecure;
             });
         }
 
@@ -895,152 +921,72 @@
             document.getElementById('secureScore').textContent = scores.secure;
 
             let resultTitle = '';
+            let resultTagline = '';
             let resultDescription = '';
 
-            // Calculate absolute difference for trap vs fearful-avoidant
-            const anxiousAvoidantDiff = Math.abs(scores.anxious - scores.avoidant);
+            // ✅ CORRECTED 6-PATTERN LOGIC (Check in priority order)
 
-            // ✅ CORRECTED 6-PATTERN LOGIC (using dominance + balance)
-            
-            // Pattern 1: Classic Anxious
-            if (scores.anxious >= 25 && scores.anxious > scores.avoidant && scores.avoidant < 15) {
-                resultTitle = "🟢 Classic Anxious Attachment";
+            // 1. SECURE (Partner Is Problem)
+            if (scores.secure >= 12 && 
+                scores.secure >= (scores.anxious + 3) && 
+                scores.secure >= (scores.avoidant + 3) &&
+                scores.trap < 6 &&
+                scores.fearful < 10) {
+                
+                resultTitle = "🟣 Secure (Partner Is The Problem)";
+                resultTagline = "You can communicate, give space, stay grounded. Boundaries, not rescue.";
                 resultDescription = `
-                    <h3>"You're the chaser."</h3>
-                    <p><strong>You don't want too much. You want consistency.</strong></p>
-                    
-                    <h3>When someone pulls away:</h3>
+                    <h3>What This Means:</h3>
+                    <p>You have secure attachment. You can:</p>
                     <ul>
-                        <li>Your body goes into alarm</li>
-                        <li>Your thoughts spiral</li>
-                        <li>You feel like you must do something right now</li>
+                        <li>Communicate clearly</li>
+                        <li>Give space without panic</li>
+                        <li>Stay grounded during conflict</li>
+                        <li>Set healthy boundaries</li>
                     </ul>
-                    <p>So you text. You overgive. You try to earn safety.</p>
-                    <p><strong>This is not insecurity. It's a nervous system that learned love disappears.</strong></p>
-                    
-                    <h3>What You Need:</h3>
-                    <p><strong>Regulate before you relate.</strong></p>
-                    <p>When you feel triggered:</p>
-                    <ol>
-                        <li>Pause 20 minutes</li>
-                        <li>Breathe, walk, move your body</li>
-                        <li>Then communicate calmly</li>
-                    </ol>
-                    <p><strong>When your body feels safe, you stop chasing.</strong></p>
-                `;
-            }
-            
-            // Pattern 2: Classic Avoidant
-            else if (scores.avoidant >= 25 && scores.avoidant > scores.anxious && scores.anxious < 15) {
-                resultTitle = "🔵 Avoidant Attachment";
-                resultDescription = `
-                    <h3>"You pull away when it gets real."</h3>
-                    <p><strong>You don't hate intimacy. You hate losing yourself in it.</strong></p>
-                    
-                    <h3>When someone gets close:</h3>
-                    <ul>
-                        <li>You feel pressure</li>
-                        <li>You feel trapped</li>
-                        <li>You shut down</li>
-                    </ul>
-                    <p>So you create distance to feel safe.</p>
-                    <p><strong>You learned: closeness = danger</strong></p>
-                    
-                    <h3>What You Need:</h3>
-                    <p><strong>Stay when the urge is to run.</strong></p>
-                    <p>When you feel the urge to disappear:</p>
-                    <ul>
-                        <li>Don't ghost</li>
-                        <li>Don't shut down</li>
-                        <li>Just slow down and stay present</li>
-                    </ul>
-                    <p><strong>Your nervous system has to learn: closeness is not loss of freedom.</strong></p>
-                `;
-            }
-            
-            // Pattern 3: Anxious-Avoidant Trap (interpersonal war)
-            else if (scores.anxious >= 20 && scores.avoidant >= 20 && anxiousAvoidantDiff >= 5) {
-                resultTitle = "🚨 The Anxious-Avoidant Trap";
-                resultDescription = `
-                    <h3>"One chases. One runs."</h3>
-                    <p><strong>This isn't incompatibility. It's a nervous system loop.</strong></p>
-                    
-                    <p>One partner needs closeness. The other needs space.</p>
-                    <p>The more one moves forward, the more the other pulls away.</p>
-                    <p><strong>No one feels safe.</strong></p>
-                    
-                    <h3>What You Need:</h3>
-                    <p><strong>Break the cycle, not fix each other.</strong></p>
-                    <p>The anxious must stop chasing. The avoidant must stop disappearing.</p>
-                    <p><strong>If the pattern doesn't change, the relationship never will.</strong></p>
-                    
-                    <h3>Watch These Episodes:</h3>
-                    <ul>
-                        <li>Episode 6: The Anxious-Avoidant Death Wheel</li>
-                        <li>Episode 9: Can They Actually Change?</li>
-                        <li>Episode 10: What I Wish I Knew Before I Wasted Years</li>
-                        <li>Episode 11: The One Sign It's Time to Leave</li>
-                    </ul>
-                `;
-            }
-            
-            // Pattern 4: Fearful-Avoidant (disorganized - internal war)
-            else if (scores.anxious >= 15 && scores.anxious <= 24 && 
-                     scores.avoidant >= 15 && scores.avoidant <= 24 && 
-                     anxiousAvoidantDiff <= 4) {
-                resultTitle = "⚡ Fearful-Avoidant (Disorganized)";
-                resultDescription = `
-                    <h3>"You want love… and it terrifies you."</h3>
-                    <p><strong>You crave connection. Then feel overwhelmed. Then pull away. Then panic about losing them.</strong></p>
-                    
-                    <p>It feels like two people inside one body.</p>
-                    <p><strong>That's trauma — not weakness.</strong></p>
-                    
-                    <h3>What You Need:</h3>
-                    <p><strong>Inner safety before outer love.</strong></p>
-                    <p>You must heal:</p>
-                    <ul>
-                        <li>Abandonment wounds</li>
-                        <li>Fear of being trapped</li>
-                    </ul>
-                    <p><strong>Your nervous system needs to learn: intimacy is safe.</strong></p>
-                    
-                    <h3>This Requires Professional Help:</h3>
-                    <p>Trauma-informed therapy, somatic work (EMDR, IFS), and nervous system regulation are essential.</p>
-                `;
-            }
-            
-            // Pattern 5: Secure (but partner isn't)
-            else if (scores.secure >= 15 && scores.secure > scores.anxious && scores.secure > scores.avoidant) {
-                resultTitle = "🟣 Secure — But Your Partner Isn't";
-                resultDescription = `
-                    <h3>You can:</h3>
-                    <ul>
-                        <li>Communicate</li>
-                        <li>Give space</li>
-                        <li>Stay grounded</li>
-                    </ul>
-                    <p><strong>But the relationship still feels unstable.</strong></p>
-                    <p>That's because you're not the problem.</p>
-                    
+
+                    <h3>So Why Are You Here?</h3>
+                    <p>Because you're with someone who <strong>ISN'T</strong> secure.</p>
+                    <p><strong>The relationship still feels unstable.</strong></p>
+                    <p>That's because <strong>you're not the problem.</strong></p>
+
+                    <h3>The Truth:</h3>
+                    <p>Secure people can handle avoidant partners better than anxious people can.</p>
+                    <p>But <strong>"better" doesn't mean "good."</strong></p>
+
                     <h3>What You Need:</h3>
                     <p><strong>Boundaries, not rescue.</strong></p>
                     <p>You don't fix people. You choose partners who can meet you.</p>
-                    
+
                     <h3>The Question:</h3>
-                    <p>Are you happy with THIS version of them?</p>
-                    <p>Or are you waiting for who they could become?</p>
+                    <p>Are you happy with <strong>THIS version</strong> of them?</p>
+                    <p>Or are you waiting for who they <strong>could become?</strong></p>
                     <p><strong>If it's the second one — you're setting yourself up for disappointment.</strong></p>
+
+                    <h3>Episodes You NEED:</h3>
+                    <ul>
+                        <li>Episode 5: Why They Only Want You When You're Gone</li>
+                        <li>Episode 6: Avoidant vs. Just Not Into You</li>
+                        <li>Episode 7: Why Your Love Makes Them Angry</li>
+                        <li>Episode 11: The One Sign It's Time To Leave</li>
+                    </ul>
                 `;
             }
             
-            // Pattern 6: Becoming Secure (healing in progress)
-            else if (scores.secure >= 10 && scores.secure <= 14 &&
-                     scores.anxious >= 10 && scores.anxious <= 19 &&
-                     scores.avoidant >= 10 && scores.avoidant <= 19 &&
-                     scores.anxious < 25 && scores.avoidant < 25) {
-                resultTitle = "🟡 Becoming Secure (Healing in Progress)";
+            // 2. BECOMING SECURE (Healing)
+            else if (scores.becomingSecure >= 8 &&
+                     scores.secure >= 8 &&
+                     scores.anxious < 12 &&
+                     scores.avoidant < 12 &&
+                     scores.trap < 6 &&
+                     scores.fearful < 10) {
+                
+                resultTitle = "🟡 Becoming Secure (Healing In Progress)";
+                resultTagline = "You still get triggered. But now you pause, self-soothe, choose differently.";
                 resultDescription = `
+                    <h3>What This Means:</h3>
+                    <p>You're in transition. You were anxious/avoidant, but you're doing the work.</p>
+
                     <h3>You still get triggered sometimes. You still feel old patterns.</h3>
                     <p><strong>But now:</strong></p>
                     <ul>
@@ -1049,84 +995,552 @@
                         <li>You choose differently</li>
                     </ul>
                     <p><strong>That's healing.</strong></p>
-                    
-                    <h3>What You Need:</h3>
-                    <p><strong>Consistency.</strong></p>
-                    <p>Keep calming your nervous system. Keep choosing secure behavior.</p>
-                    <p><strong>This is how attachment rewires.</strong></p>
-                    
+
                     <h3>Signs You're On The Right Path:</h3>
+                    <ul>
+                        <li>You notice your patterns</li>
+                        <li>You catch yourself mid-reaction</li>
+                        <li>You communicate more clearly</li>
+                        <li>You choose better partners</li>
+                        <li>You leave toxic situations faster</li>
+                    </ul>
+
+                    <h3>What Healing Looks Like:</h3>
+                    <p>You're learning that:</p>
                     <ul>
                         <li>Discomfort ≠ danger</li>
                         <li>Needs ≠ needy</li>
                         <li>Boundaries ≠ mean</li>
                         <li>Walking away ≠ failure</li>
                     </ul>
+
+                    <h3>What You Need:</h3>
+                    <p><strong>Consistency.</strong></p>
+                    <p>Keep calming your nervous system. Keep choosing secure behavior.</p>
+                    <p><strong>This is how attachment rewires.</strong></p>
+
+                    <h3>Keep Going:</h3>
+                    <p>Continue therapy, self-awareness practices, boundary setting, and choosing emotionally available people.</p>
+                    <p><strong>Your nervous system is rewiring. This is HARD work. You're doing it.</strong></p>
+
+                    <h3>Episodes For You:</h3>
+                    <ul>
+                        <li>ALL 12 EPISODES</li>
+                        <li>Especially Episode 8: What You Can Control</li>
+                        <li>Episode 12: How To Maintain Your Progress</li>
+                    </ul>
                 `;
             }
             
-            // Default fallback (for edge cases)
+            // 3. SECURE STUCK IN THE TRAP (Special Case)
+            else if (scores.trap >= 6 &&
+                     scores.secure >= 12 &&
+                     scores.secure >= (scores.anxious + 3) &&
+                     scores.secure >= (scores.avoidant + 3)) {
+                
+                // Determine their role
+                let yourRole = scores.anxious > scores.avoidant ? "PURSUER" : "WITHDRAWER";
+                
+                resultTitle = "🟣 Secure — But Stuck in the Trap";
+                resultTagline = "You're secure. Your partner is creating the chase-withdraw cycle.";
+                resultDescription = `
+                    <h3>What This Means:</h3>
+                    <p><strong>You are secure.</strong> You can:</p>
+                    <ul>
+                        <li>Regulate your emotions</li>
+                        <li>Communicate clearly</li>
+                        <li>Set boundaries</li>
+                        <li>Stay grounded in conflict</li>
+                    </ul>
+
+                    <p><strong>But you're stuck in a chase-withdraw dynamic.</strong></p>
+                    <p>This isn't about YOUR attachment. This is about your PARTNER'S attachment pulling you into a cycle.</p>
+
+                    <h3>Your Role:</h3>
+                    <p>Based on your answers, you're the <strong>${yourRole}</strong> in this dynamic.</p>
+                    <p>${yourRole === "WITHDRAWER" ? 
+                        "Your partner pursues, you withdraw — not because you're avoidant, but because their pursuing feels overwhelming." :
+                        "You pursue, they withdraw — not because you're anxious, but because their distance triggers you."}</p>
+
+                    <h3>The Truth:</h3>
+                    <p>Secure people CAN handle insecure partners better than anxious people can.</p>
+                    <p>But <strong>"better" doesn't mean "good."</strong></p>
+                    
+                    <p><strong>You're not in a toxic anxious-avoidant pair.</strong></p>
+                    <p>You're a <strong>secure person with an insecure partner</strong> who creates the cycle.</p>
+
+                    <h3>Why This Happens:</h3>
+                    <p>Your partner's attachment style is creating the pattern:</p>
+                    <ul>
+                        <li>If they're anxious → They chase, you feel overwhelmed, you create space</li>
+                        <li>If they're avoidant → They withdraw, you pursue (because that's not normal), they retreat more</li>
+                    </ul>
+
+                    <h3>What You Need:</h3>
+                    <p><strong>Boundaries, not rescue.</strong></p>
+                    
+                    <p><strong>This is NOT your work to do.</strong> You're already secure.</p>
+                    
+                    <p>The question is:</p>
+                    <ul>
+                        <li>Are you happy with THIS version of them?</li>
+                        <li>Or are you waiting for who they could become?</li>
+                        <li>Can YOU stay regulated while THEY do their work?</li>
+                        <li>Or is this relationship costing you your peace?</li>
+                    </ul>
+
+                    <p><strong>If it's costing you your peace — that's your answer.</strong></p>
+
+                    <h3>You Cannot:</h3>
+                    <ul>
+                        <li>Love them into security</li>
+                        <li>Model your way into their healing</li>
+                        <li>Fix their attachment wounds</li>
+                        <li>Make them do the work</li>
+                    </ul>
+
+                    <h3>You Can:</h3>
+                    <ul>
+                        <li>Set clear boundaries about the chase-withdraw cycle</li>
+                        <li>Decide if their current capacity is enough for you</li>
+                        <li>Walk away if they refuse to work on themselves</li>
+                        <li>Stop participating in the dynamic</li>
+                    </ul>
+
+                    <h3>Episodes You NEED:</h3>
+                    <ul>
+                        <li>Episode 5: Why They Only Want You When You're Gone</li>
+                        <li>Episode 6: Avoidant vs. Just Not Into You</li>
+                        <li>Episode 7: Why Your Love Makes Them Angry</li>
+                        <li>Episode 11: The One Sign It's Time To Leave</li>
+                    </ul>
+
+                    <p><strong>You deserve a partner who can meet you where you are. Not one you have to chase or run from.</strong></p>
+                `;
+            }
+            
+            // 4. ANXIOUS-AVOIDANT TRAP (Both Insecure)
+            else if (scores.trap >= 6) {
+                
+                // Determine their role
+                let yourRole = scores.anxious > scores.avoidant ? "PURSUER" : "WITHDRAWER";
+                
+                resultTitle = "🚨 Anxious-Avoidant Trap";
+                resultTagline = "One chases. One runs. Break the cycle, not fix each other.";
+                resultDescription = `
+                    <h3>What This Means:</h3>
+                    <p><strong>You're in the most toxic dynamic in attachment theory.</strong></p>
+                    <p>This isn't incompatibility. It's a nervous system loop.</p>
+
+                    <h3>The Cycle:</h3>
+                    <p>One partner needs closeness. The other needs space.</p>
+                    <p>The more one moves forward, the more the other pulls away.</p>
+                    <ul>
+                        <li>They pull away → You chase</li>
+                        <li>You chase → They retreat</li>
+                        <li>They retreat → You panic</li>
+                        <li>You panic → They shut down</li>
+                        <li>They shut down → You chase harder</li>
+                    </ul>
+                    <p><strong>This can last YEARS.</strong></p>
+                    <p><strong>No one feels safe.</strong></p>
+
+                    <h3>Why It Happens:</h3>
+                    <p>You're in an <strong>interpersonal cycle</strong> where:</p>
+                    <ul>
+                        <li>The pursuer = anxious attachment</li>
+                        <li>The withdrawer = avoidant attachment</li>
+                        <li>Together = endless dance</li>
+                    </ul>
+
+                    <h3>The Brutal Truth:</h3>
+                    <p>This won't get better without <strong>BOTH of you</strong> doing serious work.</p>
+                    <p><strong>If only you change:</strong> You become a doormat<br>
+                    <strong>If only they change:</strong> Unlikely without consequences<br>
+                    <strong>If neither changes:</strong> Years of suffering</p>
+
+                    <h3>What You Need:</h3>
+                    <p><strong>Break the cycle, not fix each other.</strong></p>
+                    <p>The anxious partner must <strong>stop chasing</strong>.<br>
+                    The avoidant partner must <strong>stop disappearing</strong>.</p>
+                    <p><strong>If the pattern doesn't change, the relationship never will.</strong></p>
+
+                    <h3>Your Role:</h3>
+                    <p>Based on your answers, you're the <strong>${yourRole}</strong> in this dynamic.</p>
+
+                    <h3>Episodes You CANNOT Miss:</h3>
+                    <ul>
+                        <li>ALL 12 EPISODES</li>
+                        <li>Especially Episode 6: The Anxious-Avoidant Death Wheel</li>
+                        <li>Episode 9: Can They Actually Change?</li>
+                        <li>Episode 10: What I Wish I Knew Before I Wasted Years</li>
+                        <li>Episode 11: The One Sign It's Time To Leave</li>
+                    </ul>
+                `;
+            }
+            
+            // 5. FEARFUL-AVOIDANT (Disorganized)
+            else if (scores.fearful >= 10 &&
+                     scores.anxious >= 8 &&
+                     scores.avoidant >= 8 &&
+                     scores.fearful >= (scores.anxious + 2) &&
+                     scores.fearful >= (scores.avoidant + 2) &&
+                     scores.trap < 6) {
+                
+                resultTitle = "⚡ Fearful-Avoidant (Disorganized)";
+                resultTagline = "You want love… and it terrifies you. Inner safety before outer love.";
+                resultDescription = `
+                    <h3>What This Means:</h3>
+                    <p>You have BOTH anxious AND avoidant traits. The internal battle:</p>
+                    <ul>
+                        <li>You crave connection</li>
+                        <li>Then feel overwhelmed</li>
+                        <li>Then pull away</li>
+                        <li>Then panic about losing them</li>
+                    </ul>
+                    <p><strong>It feels like two people inside one body.</strong></p>
+                    <p><strong>That's trauma — not weakness.</strong></p>
+
+                    <h3>The Internal War:</h3>
+                    <p><strong>Anxious side:</strong> "Please don't leave me, I need you"<br>
+                    <strong>Avoidant side:</strong> "Don't get too close, I need space"<br>
+                    <strong>The result:</strong> Constant internal conflict</p>
+
+                    <h3>What Happens In Relationships:</h3>
+                    <ul>
+                        <li>You get close → Feel suffocated → Create distance</li>
+                        <li>They pull back → You panic → You chase</li>
+                        <li>They come closer → You feel overwhelmed → Repeat</li>
+                    </ul>
+                    <p><strong>Your partners feel:</strong> Confused and exhausted<br>
+                    <strong>You feel:</strong> Crazy and broken</p>
+
+                    <h3>The Truth:</h3>
+                    <p><strong>You're not broken. You're disorganized.</strong></p>
+                    <p>Your nervous system received contradictory instructions about love. It learned that people are <strong>both</strong> your source of safety <strong>AND</strong> danger.</p>
+                    <p>So it does both — seeks connection and pushes it away — <strong>at the same time.</strong></p>
+                    <p><strong>You're unsafe both WITH and WITHOUT closeness.</strong></p>
+
+                    <h3>What You Need:</h3>
+                    <p><strong>Inner safety before outer love.</strong></p>
+                    <p>You must heal:</p>
+                    <ul>
+                        <li>Abandonment wounds</li>
+                        <li>Fear of being trapped</li>
+                    </ul>
+                    <p><strong>Your nervous system needs to learn: intimacy is safe.</strong></p>
+
+                    <h3>This Requires Professional Help:</h3>
+                    <p>Fearful-avoidant is complex trauma. You need:</p>
+                    <ul>
+                        <li>Trauma-informed therapy (EMDR, IFS, somatic work)</li>
+                        <li>Nervous system regulation practices</li>
+                        <li>Attachment-focused treatment</li>
+                        <li>Time and patience — this is deep healing work</li>
+                    </ul>
+
+                    <h3>Episodes You CANNOT Miss:</h3>
+                    <ul>
+                        <li>Episode 3: You're Not "Too Needy"</li>
+                        <li>Episode 4: What Happens In Your Brain</li>
+                        <li>Episode 8: What You Can Control</li>
+                        <li>Episode 9: Can You Change?</li>
+                        <li>Episode 12: How To Stop This Pattern</li>
+                    </ul>
+                    <p><strong>You CAN heal from this. But it takes real work with a professional who understands attachment trauma.</strong></p>
+                `;
+            }
+            
+            // 6. CLASSIC ANXIOUS
+            else if (scores.anxious >= 12 &&
+                     scores.anxious >= (scores.avoidant + 3) &&
+                     scores.anxious >= (scores.secure + 3) &&
+                     scores.avoidant < 8 &&
+                     scores.trap < 6 &&
+                     scores.fearful < 10) {
+                
+                resultTitle = "🟢 Classic Anxious Attachment";
+                resultTagline = "You're the chaser. Regulate before you relate.";
+                resultDescription = `
+                    <h3>You're the person who:</h3>
+                    <ul>
+                        <li>Checks phone constantly waiting for their text</li>
+                        <li>Replays every conversation obsessively</li>
+                        <li>Feels panic when they pull away</li>
+                        <li>Sacrifices your needs to keep them close</li>
+                        <li>Attracts emotionally unavailable people</li>
+                    </ul>
+
+                    <h3>The Truth:</h3>
+                    <p><strong>You're not "too needy."</strong></p>
+                    <p>Your nervous system learned that love is conditional and must be earned. So you chase, overgive, and sacrifice yourself trying to prove you're worthy.</p>
+                    <p><strong>You don't want too much. You want consistency.</strong></p>
+
+                    <h3>When someone pulls away:</h3>
+                    <ul>
+                        <li>Your body goes into alarm</li>
+                        <li>Your thoughts spiral</li>
+                        <li>You feel like you must do something right now</li>
+                    </ul>
+                    <p>So you text. You overgive. You try to earn safety.</p>
+                    <p><strong>This is not insecurity. It's a nervous system that learned love disappears.</strong></p>
+
+                    <h3>Why You Feel Crazy:</h3>
+                    <p>Your brain is experiencing <strong>intermittent reinforcement</strong> — the same mechanism that makes gambling addictive.</p>
+                    <p>Sometimes they're warm (dopamine hit). Sometimes they're cold (panic).</p>
+                    <p>Your brain gets HOOKED trying to crack the code.</p>
+                    <p><strong>But there is no code. Because this isn't about you.</strong></p>
+
+                    <h3>What You Need:</h3>
+                    <p><strong>Regulate before you relate.</strong></p>
+                    <p>When you feel triggered:</p>
+                    <ol>
+                        <li><strong>Pause 20 minutes</strong></li>
+                        <li><strong>Breathe, walk, move your body</strong></li>
+                        <li><strong>Then communicate calmly</strong></li>
+                    </ol>
+                    <p><strong>When your body feels safe, you stop chasing.</strong></p>
+
+                    <h3>Episodes You CANNOT Miss:</h3>
+                    <ul>
+                        <li>Episode 2: Why Your Brain Is Addicted To Them</li>
+                        <li>Episode 3: You're Not "Too Needy"</li>
+                        <li>Episode 8: The One Thing You Can Control</li>
+                        <li>Episode 12: How To Stop Attracting Avoidants</li>
+                    </ul>
+                `;
+            }
+            
+            // 7. AVOIDANT
+            else if (scores.avoidant >= 12 &&
+                     scores.avoidant >= (scores.anxious + 3) &&
+                     scores.avoidant >= (scores.secure + 3) &&
+                     scores.anxious < 8 &&
+                     scores.trap < 6) {
+                
+                resultTitle = "🔵 Avoidant Attachment";
+                resultTagline = "You pull away when it gets real. Stay when the urge is to run.";
+                resultDescription = `
+                    <h3>You're the person who:</h3>
+                    <ul>
+                        <li>Needs space after intimacy</li>
+                        <li>Feels suffocated by their needs</li>
+                        <li>Pulls away when they get close</li>
+                        <li>Values independence over connection</li>
+                        <li>Shuts down during conflict</li>
+                    </ul>
+
+                    <h3>The Truth:</h3>
+                    <p><strong>You're not cold or broken.</strong></p>
+                    <p>Your nervous system learned that intimacy = losing yourself. So you create distance to survive.</p>
+                    <p><strong>You don't hate intimacy. You hate losing yourself in it.</strong></p>
+
+                    <h3>When someone gets close:</h3>
+                    <ul>
+                        <li>You feel pressure</li>
+                        <li>You feel trapped</li>
+                        <li>You shut down</li>
+                    </ul>
+                    <p>So you create distance to feel safe.</p>
+                    <p><strong>You learned: closeness = danger</strong></p>
+
+                    <h3>Why They Feel Crazy:</h3>
+                    <p>Every time they get close, you pull away.</p>
+                    <p><strong>To you:</strong> Self-protection<br>
+                    <strong>To them:</strong> Rejection</p>
+                    <p>You're not trying to hurt them. But you are.</p>
+
+                    <h3>What You Need:</h3>
+                    <p><strong>Stay when the urge is to run.</strong></p>
+                    <p>When you feel the urge to disappear:</p>
+                    <ul>
+                        <li><strong>Don't ghost</strong></li>
+                        <li><strong>Don't shut down</strong></li>
+                        <li><strong>Just slow down and stay present</strong></li>
+                    </ul>
+                    <p><strong>Your nervous system has to learn: closeness is not loss of freedom.</strong></p>
+
+                    <h3>Episodes You NEED:</h3>
+                    <ul>
+                        <li>Episode 4: What Happens In Your Brain When You Get Close</li>
+                        <li>Episode 6: Avoidant vs. Just Not Into You</li>
+                        <li>Episode 9: Can Avoidants Actually Change?</li>
+                        <li>Episode 11: The One Sign It's Time To Walk Away</li>
+                    </ul>
+                `;
+            }
+            
+            // FALLBACK: Mixed/Complex Pattern
             else {
-                // Check for avoidant-leaning patterns (like Anxious 6, Avoidant 16, Secure 8)
-                if (scores.avoidant > scores.anxious && scores.avoidant > scores.secure) {
-                    resultTitle = "🔵 Avoidant-Leaning Pattern";
+                // Check if this is avoidant-leaning (moderate avoidant, not quite Trap)
+                if (scores.avoidant >= 10 && scores.avoidant > scores.anxious && 
+                    scores.avoidant < 12 && scores.trap < 6) {
+                    resultTitle = "Avoidant-Leaning Pattern";
+                    resultTagline = "You lean avoidant but aren't in a full chase-withdraw dynamic.";
                     resultDescription = `
-                        <h3>Your dominant pattern is avoidant.</h3>
-                        <p><strong>Anxious: ${scores.anxious}/45 | Avoidant: ${scores.avoidant}/42 | Secure: ${scores.secure}/25</strong></p>
-                        
-                        <p>You're showing avoidant tendencies — pulling away when things get close, needing space to feel safe.</p>
-                        
+                        <h3>Your Scores:</h3>
+                        <p><strong>Anxious:</strong> ${scores.anxious}/21<br>
+                        <strong>Avoidant:</strong> ${scores.avoidant}/21<br>
+                        <strong>Secure:</strong> ${scores.secure}/18</p>
+
                         <h3>What This Means:</h3>
-                        <p>You may not be high enough to be "classic avoidant," but avoidance is your dominant strategy. You're likely:</p>
+                        <p>Your avoidant score is moderate (${scores.avoidant}) and higher than anxious (${scores.anxious}).</p>
+                        <p>But you're not high enough to be "Classic Avoidant" and you're not clearly in a Trap dynamic.</p>
+
+                        <h3>You Likely:</h3>
                         <ul>
-                            <li>Uncomfortable with intimacy</li>
-                            <li>Valuing independence over connection</li>
-                            <li>Creating distance when partners get close</li>
+                            <li>Need space after intimacy (but not extreme)</li>
+                            <li>Value independence over connection</li>
+                            <li>Feel some discomfort with emotional closeness</li>
+                            <li>Pull back when relationships get too intense</li>
+                            <li>Aren't fully deactivated like pure avoidants</li>
                         </ul>
-                        
-                        <p><strong>This is NOT "becoming secure." This is early-stage avoidance.</strong></p>
-                        
+
+                        <h3>This Could Mean:</h3>
+                        <ul>
+                            <li><strong>Early avoidant patterns:</strong> Starting to develop avoidant strategies</li>
+                            <li><strong>Context-dependent:</strong> Avoidant with some people, less so with others</li>
+                            <li><strong>Healing from anxious:</strong> Moving away from anxious, not yet secure</li>
+                        </ul>
+
                         <h3>What You Need:</h3>
-                        <p>Practice staying present when the urge is to run. Work on tolerating vulnerability and closeness.</p>
+                        <p><strong>Practice staying present when the urge is to withdraw.</strong></p>
+                        <p>Work on tolerating vulnerability and closeness without immediately needing space.</p>
+
+                        <h3>Watch These Episodes:</h3>
+                        <ul>
+                            <li>Episode 4: What Happens In Your Brain When You Get Close</li>
+                            <li>Episode 6: Avoidant vs. Just Not Into You</li>
+                            <li>Episode 9: Can You Change?</li>
+                        </ul>
                     `;
-                } else if (scores.anxious > scores.avoidant && scores.anxious > scores.secure) {
-                    resultTitle = "🟢 Anxious-Leaning Pattern";
+                }
+                // Check if this is anxious-leaning (moderate anxious, not quite Trap)
+                else if (scores.anxious >= 10 && scores.anxious > scores.avoidant && 
+                         scores.anxious < 12 && scores.trap < 6) {
+                    resultTitle = "Anxious-Leaning Pattern";
+                    resultTagline = "You lean anxious but aren't in a full chase-withdraw dynamic.";
                     resultDescription = `
-                        <h3>Your dominant pattern is anxious.</h3>
-                        <p><strong>Anxious: ${scores.anxious}/45 | Avoidant: ${scores.avoidant}/42 | Secure: ${scores.secure}/25</strong></p>
-                        
-                        <p>You're showing anxious tendencies — seeking reassurance, fearing abandonment, overthinking.</p>
-                        
+                        <h3>Your Scores:</h3>
+                        <p><strong>Anxious:</strong> ${scores.anxious}/21<br>
+                        <strong>Avoidant:</strong> ${scores.avoidant}/21<br>
+                        <strong>Secure:</strong> ${scores.secure}/18</p>
+
                         <h3>What This Means:</h3>
-                        <p>You may not be high enough to be "classic anxious," but anxiety is your dominant strategy. You're likely:</p>
+                        <p>Your anxious score is moderate (${scores.anxious}) and higher than avoidant (${scores.avoidant}).</p>
+                        <p>But you're not high enough to be "Classic Anxious" and you're not clearly in a Trap dynamic.</p>
+
+                        <h3>You Likely:</h3>
                         <ul>
-                            <li>Checking phone frequently</li>
-                            <li>Needing reassurance from partners</li>
-                            <li>Feeling insecure in relationships</li>
+                            <li>Seek reassurance from partners (but not constantly)</li>
+                            <li>Feel anxious when they pull away</li>
+                            <li>Overthink relationship interactions</li>
+                            <li>Want closeness and consistency</li>
+                            <li>Aren't fully hyperactivated like pure anxious</li>
                         </ul>
-                        
+
+                        <h3>This Could Mean:</h3>
+                        <ul>
+                            <li><strong>Early anxious patterns:</strong> Starting to develop anxious strategies</li>
+                            <li><strong>Context-dependent:</strong> Anxious with some people, less so with others</li>
+                            <li><strong>Healing from avoidant:</strong> Opening up after being closed off</li>
+                        </ul>
+
                         <h3>What You Need:</h3>
-                        <p>Practice self-soothing before reaching out. Build internal security rather than seeking it externally.</p>
-                    `;
-                } else {
-                    resultTitle = "Your Pattern Is Complex";
-                    resultDescription = `
-                        <h3>Your scores show a mixed pattern.</h3>
-                        <p><strong>Anxious: ${scores.anxious}/45 | Avoidant: ${scores.avoidant}/42 | Secure: ${scores.secure}/25</strong></p>
-                        
-                        <p>You don't fit cleanly into one category, which is actually common. You may be:</p>
+                        <p><strong>Practice self-soothing before reaching out.</strong></p>
+                        <p>Work on building internal security rather than seeking it externally.</p>
+
+                        <h3>Watch These Episodes:</h3>
                         <ul>
-                            <li>In transition between patterns</li>
-                            <li>Context-dependent (secure with some, insecure with others)</li>
-                            <li>Still learning your attachment style</li>
+                            <li>Episode 2: Why Your Brain Is Addicted</li>
+                            <li>Episode 3: You're Not "Too Needy"</li>
+                            <li>Episode 8: What You Can Control</li>
                         </ul>
-                        
-                        <p>Consider working with a therapist who specializes in attachment theory to understand your unique combination.</p>
+                    `;
+                }
+                // Check if this is a low-activation profile
+                else if (scores.anxious < 8 && scores.avoidant < 8 && scores.secure < 12) {
+                    resultTitle = "Low Attachment Activation";
+                    resultTagline = "You're not strongly anxious, avoidant, or fully secure yet.";
+                    resultDescription = `
+                        <h3>Your Scores:</h3>
+                        <p><strong>Anxious:</strong> ${scores.anxious}/21<br>
+                        <strong>Avoidant:</strong> ${scores.avoidant}/21<br>
+                        <strong>Secure:</strong> ${scores.secure}/18</p>
+
+                        <h3>What This Means:</h3>
+                        <p>Your scores show <strong>low insecure activation</strong> across the board.</p>
+                        <p>You're not strongly anxious or avoidant, but you're also not fully secure yet.</p>
+
+                        <h3>This Could Mean:</h3>
+                        <ul>
+                            <li><strong>You're in transition:</strong> Moving toward secure attachment</li>
+                            <li><strong>Low attachment intensity:</strong> Relationships aren't central to your identity right now</li>
+                            <li><strong>Context-dependent:</strong> Secure in some situations, insecure in others</li>
+                            <li><strong>Still learning:</strong> You haven't fully developed your attachment patterns yet</li>
+                            <li><strong>Detached/numb:</strong> You've shut down emotionally as protection</li>
+                        </ul>
+
+                        <h3>What You Need:</h3>
+                        <p>Explore which scenario fits you:</p>
+                        <ul>
+                            <li>If you're <strong>healing</strong> → Continue the work, you're on the right path</li>
+                            <li>If you're <strong>numb/detached</strong> → Work on reconnecting with your emotions</li>
+                            <li>If you're <strong>confused</strong> → Pay attention to your patterns over the next few months</li>
+                        </ul>
+
+                        <h3>Watch The Full Series:</h3>
+                        <p>All 12 episodes will help you understand where you fall and what to do next.</p>
+                    `;
+                }
+                // Default mixed pattern
+                else {
+                    resultTitle = "Mixed Attachment Pattern";
+                    resultTagline = "You show traits from multiple patterns without clear dominance.";
+                    resultDescription = `
+                        <h3>Your Scores:</h3>
+                        <p><strong>Anxious:</strong> ${scores.anxious}/21<br>
+                        <strong>Avoidant:</strong> ${scores.avoidant}/21<br>
+                        <strong>Secure:</strong> ${scores.secure}/18<br>
+                        <strong>Trap:</strong> ${scores.trap}/9<br>
+                        <strong>Fearful:</strong> ${scores.fearful}/18</p>
+
+                        <h3>What This Means:</h3>
+                        <p>You don't fit cleanly into one category. Your scores are:</p>
+                        <ul>
+                            <li>Anxious: ${scores.anxious} (moderate, not dominant)</li>
+                            <li>Avoidant: ${scores.avoidant} (moderate, not dominant)</li>
+                            <li>No clear relational trap pattern</li>
+                            <li>No clear disorganized pattern</li>
+                        </ul>
+
+                        <h3>This Suggests You May Be:</h3>
+                        <ul>
+                            <li><strong>Context-dependent:</strong> Anxious with some people, avoidant with others</li>
+                            <li><strong>In transition:</strong> Moving between patterns as you heal</li>
+                            <li><strong>Relationship-specific:</strong> Different attachment with different partners</li>
+                            <li><strong>Subthreshold:</strong> Showing traits but not at clinical levels</li>
+                        </ul>
+
+                        <h3>What You Need:</h3>
+                        <p>Work with an attachment-focused therapist to understand:</p>
+                        <ul>
+                            <li>When each pattern activates</li>
+                            <li>What triggers the switch</li>
+                            <li>Which one is your "home base"</li>
+                            <li>How to build more consistent security</li>
+                        </ul>
+
+                        <p><strong>This isn't a diagnosis. It's information that your pattern is complex.</strong></p>
+
+                        <h3>Watch The Full Series:</h3>
+                        <p>All 12 episodes will help you understand your unique combination of patterns.</p>
                     `;
                 }
             }
 
             document.getElementById('resultTitle').textContent = resultTitle;
+            document.getElementById('resultTagline').textContent = resultTagline;
             document.getElementById('resultDescription').innerHTML = resultDescription;
         }
     </script>
