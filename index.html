@@ -1036,7 +1036,8 @@
             else if (scores.trap >= 6 &&
                      scores.secure >= 12 &&
                      scores.secure >= (scores.anxious + 3) &&
-                     scores.secure >= (scores.avoidant + 3)) {
+                     scores.secure >= (scores.avoidant + 3) &&
+                     Math.abs(scores.anxious - scores.avoidant) < 6) {
                 
                 // Determine their role
                 let yourRole = scores.anxious > scores.avoidant ? "PURSUER" : "WITHDRAWER";
@@ -1120,7 +1121,8 @@
             }
             
             // 4. ANXIOUS-AVOIDANT TRAP (Both Insecure)
-            else if (scores.trap >= 6) {
+            else if (scores.trap >= 6 &&
+                     Math.abs(scores.anxious - scores.avoidant) < 6) {
                 
                 // Determine their role
                 let yourRole = scores.anxious > scores.avoidant ? "PURSUER" : "WITHDRAWER";
